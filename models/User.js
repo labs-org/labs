@@ -16,17 +16,7 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    // posts: [Object],
-    // location: {
-    //     type: String,
-    //     required: true,
-    //     unique: true
-    // },
-    // phone: {
-    //     type: Number,
-    //     required: true,
-    //     unique: true
-    // },
+
     avatar: {
         type: String,
         required: false
@@ -34,13 +24,13 @@ const UserSchema = new mongoose.Schema({
     officialWebsite: {
         type: String,
         required: true,
-        unique: true
+        // unique: true
     },
-    date : {
+    date: {
         type: Date,
         default: Date.now
     }
 })
 
 
-module.exports = User = mongoose.model('user', UserSchema );
+module.exports = User = mongoose.model('user', UserSchema);
