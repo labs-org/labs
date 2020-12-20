@@ -1,27 +1,27 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
 const app = express();
-const connectDB = require('./config/db');
+
+app.use(bodyParser.json());
+
+const db = require('./config/keys').mongoURI;
+
+mongoose
+    .connect(db, {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log('mongoDB connected'))
+    .catch((err) => console.log(err));
+
+const port = 3000;
 
 
-//connect database
-connectDB();
 
+app.listen(port, () => console.log(`server started on port ${port}`));
 
-//Middleware
-app.use(express.json({
-    extended: false
-}));
-// app.use(express.urlencoded());
-
-
-
-app.get('/', (req, res) => res.send('API running'))
-
-//define the routes
-app.use('/api/users', require('./routes/api/users'))
-app.use('/api/auth', require('./routes/api/auth'))
-app.use('/api/profile', require('./routes/api/profile'))
-app.use('/api/posts', require('./routes/api/posts'))
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => console.log(`server start on port ${PORT}`));
+// using routes
+app.use('/', require('./routes/api/items'));
