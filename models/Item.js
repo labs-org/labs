@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
-    
+
     testType: {
         type: String,
-        required: true,
+        // required: true,
     },
     price: {
         type: String,
-        required: true,
+        // required: true,
     },
     date: {
         type: Date,
