@@ -16,14 +16,15 @@ export const getItems = () => dispatch => {
             type: GET_ITEMS,
             payload: res.data,
 
-        }))
+        }));
+
 };
 
-export const deleteItem = (id) => {
-    return {
-        type: DELETE_ITEM,
-        payload: id
-    }
+export const deleteItem = (id) => dispatch => {
+   axios.delete(`/${id}`).then(res => dispatch({
+       type: DELETE_ITEM,
+       payload: id
+   }))
 };
 
 export const addItem = item => dispatch => {
@@ -34,7 +35,7 @@ export const addItem = item => dispatch => {
 
 
         }))
-    console.log('hi')
+    // console.log('hi')
 }
 
 export const setItemsLoading = () => {

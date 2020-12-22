@@ -15,6 +15,7 @@ import {
              isOpen: false
          }
      toggle = () => {
+         //so either it's open he will toggle, and if it's close it will toggle to open
          this.setState({
              isOpen: !this.state.isOpen
          });
@@ -30,7 +31,7 @@ import {
                  <Collapse isOpen={this.state.isOpen} navbar />
                     <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <NavLink herf="">LINK</NavLink>
+                        <NavLink herf="">Sign out</NavLink>
                     </NavItem>
                     </Nav>
                </Container>

@@ -18,7 +18,7 @@ import {addItem} from "../actions/itemActions";
 class ItemModel extends Component {
   state= {
       model: false,
-      test : '',
+      testType : '',
       price: ''
   }
   toggle = () => {
@@ -35,7 +35,8 @@ class ItemModel extends Component {
      e.preventDefault();
      const newItem = {
         
-         name: this.state.name
+        testType: this.state.testType,
+        price: this.state.price
      }
      //add item via addItem action
      this.props.addItem(newItem);
@@ -56,7 +57,7 @@ class ItemModel extends Component {
                           <FormGroup>
                               <Label for="item" >Post</Label>
                                   <Input type="text"
-                                     name="test"
+                                     name="testType"
                                      id="item"
                                      placeholder="Add your posts"
                                      onChange={this.onChange}></Input>
