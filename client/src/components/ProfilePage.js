@@ -1,86 +1,46 @@
-import React, {Component} from "react";
-import {Container,ListGroupItem, Button, ListGroup} from "reactstrap";
-import {CSSTransition, TransitionGroup} from "react-transition-group";
-import {connect} from "react-redux";
-import {getItems, deleteItem} from "../actions/itemActions";
-import PropTypes from "prop-types";
-import store from "../store";
+import React, { Component } from 'react';
+import axios from "axios"
 
-
+const Post = (props) => (
+  <tr>
+    <td>{props.item.testType}</td>
+    <td>{props.item.price}</td>
+  </tr>
+);
 class ProfilePage extends Component {
-//  componentDidMount() {
-//      this.props.getItems();
-//  };
-componentDidMount () {
-    // subscribe
-     store.getState(()=>{
-         this.forceUpdate(); 
-     });
-
-   // Dispatch
-     store.dispatch({
-         type:"POST",
-         payload: {
-           items: [
-             {
-               name:"testType",
-               price:"price"
-             }
-             
-         ]
-     }
- });
-}
-
-
- onDeleteClick = (_id)=> {
-     this.props.deleteItem(_id)
-
- };
-
-
- render() {
-     
-    const {items} = this.props.item;
-    console.log({items})
-     return (
-         <Container>         
-             <ListGroup>
-                 <TransitionGroup className = "ProfilePage">
-                    {items.map((item, _id) => (
-                        <CSSTransition key={_id} timeout={500} classNames="fade" >
-                             {/* list of the post the client did */}
-                            <ListGroupItem>
-                                
-                                <Button className="remove-btn" color ="danger" size ="sm" onClick = {this.onDeleteClick.bind(this, _id)} >
-                                    &times;
-                                </Button>
-                                {item.testType}
-                                {item.price}
-                            </ListGroupItem>
-                        </CSSTransition>
-                    )
-                    )}
-                 </TransitionGroup>
-             </ListGroup>
-         </Container>
-     )
- }
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+    };
+   
+  }
+  componentDidMount() {  
+     axios.get('/fetch') 
+       .then(response => { this.setState({ items: response.data })})     
+        .catch((error) => {    
+              console.log(error);  
+                  })  }
+  
+ profile() {    
+    return this.state.items.map(currentitem => { 
+          console.log(currentitem._id)   
+             return <Post item={currentitem} />    })  }
 
   
+
+  render() {
+   
+    return (
+      <div>
+        <br />
+        <div className="container text-center border border-light p-9">
+          <table className="table">
+            <tbody>{this.profile()}</tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
 }
-ProfilePage.propTypes = {
-    getItems: PropTypes.func.isRequired,
-    item : PropTypes.object.isRequired
-}
-
- const mapStateToProps = (state) => ({
-     item: state.item
- })
-
-
-export default connect(mapStateToProps, { getItems, deleteItem}) (ProfilePage);
-
-
-// {items.map((item) => 
-//     <p>{item.testType}</p>
+export default ProfilePage;

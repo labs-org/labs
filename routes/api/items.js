@@ -7,42 +7,30 @@ const Item = require('../../models/Item');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
+
 //route get the item
-router.get('/', (req, res) => {
-    Item.find()
-        .sort({
-            date: -1
-        })
-        .then((items) => res.json(items));
-    // console.log(posts)
+
+router.get("/fetch", async (req, res) => {
+  Item.find()
+    .then((ItemSchema) => res.json(ItemSchema))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 //route create the item
-router.post('/', (req, res) => {
-    // console.log(req.body)
-    const newItem = new Item({
-        testType: req.body.testType,
-        price: req.body.price,
-    });
-    newItem.save().then((item) => res.json(item));
-
+router.route('/').post((req, res) => {
+  const testType = req.body.testType;
+  const price = req.body.price;
+  const newItem = new Item({
+    testType,
+    price
+  });
+  // saving the new item in the data base by .save method 
+  newItem.save()
+    .then(() => res.json("POST Added!"))
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
-//route delete the item
-router.delete('/:id', (req, res) => {
-    Item.findById(req.params.id)
-        .then((item) => item.remove().then(() => res.json({
-            success: true
-        })))
-        .catch(err => res.status(404).json({
-            success: false
-        }))
-});
 
-//route update
-// router.put('/:id', (req, res) => {
-
-// })
 module.exports = router;
