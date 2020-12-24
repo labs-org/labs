@@ -29,3 +29,5 @@ app.listen(port, () => console.log(`server started on port ${port}`));
 
 // using routes
 app.use('/', require('./routes/api/items'));
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));

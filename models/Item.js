@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+      },
 
     testType: {
         type: String,
@@ -18,3 +22,5 @@ const ItemSchema = new mongoose.Schema({
 })
 
 module.exports = Item = mongoose.model('item', ItemSchema);
+
+

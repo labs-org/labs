@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import axios from "axios"
+import axios from "axios";
+// import { Router} from "react-router-dom";
+
 
 const Post = (props) => (
+
   <tr>
     <td>{props.item.testType}</td>
     <td>{props.item.price}</td>
-  </tr>
+  
+ </tr>
+
 );
+
+
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +31,7 @@ class ProfilePage extends Component {
   
  profile() {    
     return this.state.items.map(currentitem => { 
-          console.log(currentitem._id)   
+          // console.log(currentitem._id)   
              return <Post item={currentitem} />    })  }
 
   

@@ -1,19 +1,7 @@
 import React, { Component } from 'react';
 // import axios from "axios";
 // import { Link } from "react-router-dom";
-import $ from "jquery"
-
-// import { withRouter } from "react-router-dom" ;
-// import {
-//   Button,
-//   Modal,
-//   ModalHeader,
-//   ModalBody,
-//   Form,
-//   FormGroup,
-//   Label,
-//   Input
-// } from 'reactstrap';
+import $ from "jquery";
 import {Button} from "reactstrap";
 import ProfilePage from "./ProfilePage"
 
@@ -114,11 +102,7 @@ onChangeTestType(e) {
                   text-align = "center"
                   placeholder = "Enter your price"/>
                 </div>
-
-
-                
-
-                <div>
+                   <div>
                 <Button color="primary" type="submit" onClick= {this.onSubmit} className="btn btn-deep-orange darken-4">Submit</Button>
                 </div>
 
@@ -135,4 +119,3 @@ onChangeTestType(e) {
 
 
 export default AddPost ;
-
