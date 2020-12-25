@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-// import Footer from './Footer';
+// import axios from 'axios';
 import {Button} from "reactstrap";
-import $ from "jquery";
+import $ from "jquery"
 
 //creat a class for the sign up component 
 export default class Signup extends Component {
@@ -34,14 +33,12 @@ export default class Signup extends Component {
         }
         //onChance function to track the changes and help to set (change) the state .
           onChangeEmail(e) {
-            
             this.setState({
             email : e.target.value 
 
             })
           }
-          onChangePassword(e) {
-            
+          onChangePassword(e) {          
             this.setState({
             password : e.target.value
             })
@@ -52,20 +49,17 @@ export default class Signup extends Component {
             labName : e.target.value
             })
           }
-          onChangeLocation(e) {
-            
+          onChangeLocation(e) {           
             this.setState({
             location: e.target.value
             })
           }
-          onChangePhone(e) {
-            
+          onChangePhone(e) {            
             this.setState({
                 phone : e.target.value
             })
           }
-          onChangeOfficalWebSite(e) {
-            
+          onChangeOfficalWebSite(e) {            
             this.setState({
               officalWebSite : e.target.value
             })
@@ -85,29 +79,29 @@ export default class Signup extends Component {
               officialWebsite: this.state.officalWebSite,
             }
            
-            // $.ajax ({
-            //   method: "POST",
-            //   url: "/addUser/adduser",
-            //   data: JSON.stringify(user),
-            //   contentType : "application/json",
-            //   success : function () {
-            //     console.log('data posted successfully')
-            //     window.location = '/login'
-            //   },
+            $.ajax ({
+              method: "POST",
+              url: "/addUser/adduser",
+              data: JSON.stringify(user),
+              contentType : "application/json",
+              success : function () {
+                console.log('data posted successfully')
+                window.location = '/login'
+              },
                 
-            //     error : function (err) {
-            //       console.log(err)
-            //     }
+                error : function (err) {
+                  console.log(err)
+                }
       
             
-            // })
-            axios.post("/", user)
-            .then(res => {
-             window.location = '/login'
+            })
+          //   axios.post("/", user)
+          //   .then(res => {
+          //    window.location = '/login'
 
-            })  
-           .catch(err => alert('Email or phone number is used') );
-            console.log('user added')   
+          //   })  
+          //  .catch(err => alert('Email or phone number is used') );
+          //   console.log('user added')   
         }
         
         

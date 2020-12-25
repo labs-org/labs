@@ -56,20 +56,12 @@ router.post('/', [
                 });
             }
 
-            //get user gravatar(image)
-            // const avatar = gravatar.url(email, {
-            //     s: '200',
-            //     r: 'pg',
-            //     d: 'mm'
-            // })
-
             user = new User({
                 email,
                 password,
                 labName,
                 location,
                 phone,
-                // avatar,
                 officialWebsite
             })
 

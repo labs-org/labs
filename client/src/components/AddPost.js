@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
 import $ from "jquery";
 import {Button} from "reactstrap";
-import ProfilePage from "./ProfilePage"
+// import AllLabs from "./AllLabs"
 
 
 
@@ -12,18 +12,14 @@ class AddPost extends Component {
     constructor(props) {
       super(props);
 
-
     //Defining the "this" in the functions using .bind method
     this.onChangeTestType = this.onChangeTestType.bind(this);
     this.onChangePrice= this.onChangePrice.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
-
-  this.state= {  
-  
+  this.state= {    
       testType : '',
-      price: ''
-  
+      price: '' 
   }
 }
 onChangeTestType(e) {
@@ -38,10 +34,8 @@ onChangeTestType(e) {
   }
 
 
-  onSubmit(e) {
-    
+  onSubmit(e) {  
     e.preventDefault();
-
     const item = {
       testType: this.state.testType,
       price: this.state.price
@@ -49,15 +43,14 @@ onChangeTestType(e) {
 
     console.log(item);
 
-   
-      // window.location = '/ProfilePage'
       $.ajax ({
         method: "POST",
-        url: "/",
+        url: "/add",
         data: JSON.stringify(item),
         contentType : "application/json",
         success : function () {
           console.log('data posted successfully')
+          window.location = '/AllLabs'
         },
           
           error : function (err) {
@@ -108,7 +101,7 @@ onChangeTestType(e) {
 
                 
           </form>
-       <ProfilePage />
+ 
         </div>
       
       </div>

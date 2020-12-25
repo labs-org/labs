@@ -43,7 +43,7 @@ export default class Login extends Component {
        localStorage.setItem('username', response.data.user.username);
       //  console.log(response.data.user.phone)
 
-    window.location = '/Add post'
+    window.location = '/AddPost'
         })
         .catch(err =>alert("username or password is incorrect") );         
     }       
