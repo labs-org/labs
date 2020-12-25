@@ -32,4 +32,4 @@ app.listen(port, () => console.log(`server started on port ${port}`));
 // using routes
 app.use('/', require('./routes/api/items'));
 app.use('/User', require('./routes/api/users'));
-app.use('/auth', require('./routes/api/auth'));
+// app.use('/auth', require('./routes/api/auth'));

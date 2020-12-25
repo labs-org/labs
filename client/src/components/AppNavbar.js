@@ -6,12 +6,11 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
    Container
   } from 'reactstrap';
   import { Link } from "react-router-dom";
-  import { About } from './About';
-import { Contact } from './Contact';
+//   import { About } from './About';
+// import { Contact } from './Contact';
 
  class AppNavbar extends Component {
      state = {

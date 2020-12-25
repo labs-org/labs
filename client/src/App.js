@@ -35,7 +35,7 @@ class App extends Component {
               <Route path = "/login" component = { Login } />
               <Route path = "/edit/:id" component = { EditPost }/>
               <Route path = "/edituser/:id" component = { Edituser}/>
-              <Route path = "/addUser"  component = { Signup } />
+              <Route path = "/User"  component = { Signup } />
               <Route component={NoMatch} />
             </Switch>
           </Layout>

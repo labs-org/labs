@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Button} from "reactstrap";
+// import $ from "jquery"
 
 
 //creat a class for the sign up component 
@@ -19,7 +20,7 @@ export default class Signup extends Component {
      
       
         this.onSubmit = this.onSubmit.bind(this);
-      //the keys are the same as the Schema .. see the modle userSchema in user.model.js
+      //the keys are the same as the Schema .. see the modle userSchema 
      
         this.state = {
             email: '',
@@ -82,10 +83,28 @@ export default class Signup extends Component {
             axios.post("http://localhost:3000/User", user)
             .then(res => {
              window.location = '/login'
+             console.log('user added') 
 
             })  
            .catch(err => alert('Email or phone number is used') );
-            console.log('user added')   
+              
+
+          // $.ajax ({
+          //   method: "POST",
+          //   url: "http://localhost:3000/User",
+          //   data: JSON.stringify(user),
+          //   contentType : "application/json",
+          //   success : function () {
+          //     console.log('user added successfully')
+          //     window.location = '/login'
+          //   },
+              
+          //     error : function (err) {
+          //       console.log(err)
+          //     }
+    
+          
+          // })
         }
         
         
@@ -153,5 +172,3 @@ export default class Signup extends Component {
         )
     }
 }
-
-
