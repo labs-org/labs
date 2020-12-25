@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import Footer from "./Footer";
-// import Navbar_Login from "./Navbar_Login";
 import {Button} from "reactstrap";
+
+
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -35,15 +36,14 @@ export default class Login extends Component {
           password: this.state.password
         } 
         
-        axios.post("http://localhost:3000/addUser/login", user)
+        axios.post("http://localhost:3000/login", user)
         .then(response =>{
       // console.log (response)
       // console.log(response.user.data)
        localStorage.setItem('token', response.data.token);
        localStorage.setItem('username', response.data.user.username);
       //  console.log(response.data.user.phone)
-
-    window.location = '/AddPost'
+      window.location = '/AddPost'
         })
         .catch(err =>alert("username or password is incorrect") );         
     }       
@@ -54,7 +54,6 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        {/* <Navbar_Login /> */}
         <br />
         <div className="container">
           <form

@@ -25,8 +25,8 @@ export default class Edituser extends Component {
         password: "",
         labName: "",
         location:"",
-        phone:null,
-        officialWebSite :'',
+        phone:"",
+        officialWebSite :"",
        
       
       }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import {Button} from "reactstrap";
-import $ from "jquery"
+
 
 //creat a class for the sign up component 
 export default class Signup extends Component {
@@ -79,35 +79,16 @@ export default class Signup extends Component {
               officialWebsite: this.state.officalWebSite,
             }
            
-            $.ajax ({
-              method: "POST",
-              url: "/addUser/adduser",
-              data: JSON.stringify(user),
-              contentType : "application/json",
-              success : function () {
-                console.log('data posted successfully')
-                window.location = '/login'
-              },
-                
-                error : function (err) {
-                  console.log(err)
-                }
-      
-            
-            })
-          //   axios.post("/", user)
-          //   .then(res => {
-          //    window.location = '/login'
+            axios.post("http://localhost:3000/User", user)
+            .then(res => {
+             window.location = '/login'
 
-          //   })  
-          //  .catch(err => alert('Email or phone number is used') );
-          //   console.log('user added')   
+            })  
+           .catch(err => alert('Email or phone number is used') );
+            console.log('user added')   
         }
         
         
-          
-
-//where the magic happence
     render(){
         return (
 
@@ -172,3 +153,5 @@ export default class Signup extends Component {
         )
     }
 }
+
+

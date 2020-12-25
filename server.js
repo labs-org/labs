@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 var cors = require('cors');
 const bodyParser = require('body-parser');
 
+
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -29,5 +31,5 @@ app.listen(port, () => console.log(`server started on port ${port}`));
 
 // using routes
 app.use('/', require('./routes/api/items'));
-app.use('/api/users', require('./routes/api/users'));
-app.use('/api/auth', require('./routes/api/auth'));
+app.use('/User', require('./routes/api/users'));
+app.use('/auth', require('./routes/api/auth'));
