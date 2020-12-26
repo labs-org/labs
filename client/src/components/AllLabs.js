@@ -62,9 +62,7 @@ class AllLabs extends Component {
 
   
  lab() {    
-    return this.state.items.map(currentitem => { 
-          // console.log(currentitem._id)   
-        
+    return this.state.items.map(currentitem => {     
              return <Post item={currentitem} 
              deletePost={this.deletePost}
              key={currentitem._id} />    })  }

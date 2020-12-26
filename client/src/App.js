@@ -4,7 +4,6 @@ import Login from "./components/Login"
 import AppNavbar from "./components/AppNavbar";
 import AllLabs from "./components/AllLabs";
 import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
-// import * as ReactBootstrap from 'react-bootstrap';
 import AddPost from "./components/AddPost.js";
 import {HomePage} from "./components/HomePage";
 import { About } from './components/About';
@@ -48,32 +47,3 @@ class App extends Component {
 }
 
 export default App;
-
-// const App = () => {
-//     return (
-
-//           // <div className = "App" >
-//           //   <AppNavbar />
-//           //     <Container>
-//           //       <AddPost />
-//           //      </Container>
-
-//           // </div>
-//           <React.Fragment>
-//             <AppNavbar />
-            
-//             <Layout>
-//               <Router>
-//                  <Switch>
-//                     <Route exact path ="/" component ={HomePage} />
-//                     <Route exact path="/AddPost" component={AddPost} />
-//                     <Route component={NoMatch} />              
-//                  </Switch>
-//               </Router>
-//             </Layout>
-//           </React.Fragment>
-
-//     );
-// };
-
-// export default App; 

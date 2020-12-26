@@ -9,7 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 
 const db = require('./config/keys').mongoURI;
@@ -31,5 +33,6 @@ app.listen(port, () => console.log(`server started on port ${port}`));
 
 // using routes
 app.use('/', require('./routes/api/items'));
-app.use('/User', require('./routes/api/users'));
+app.use('/', require('./routes/api/users'));
 // app.use('/auth', require('./routes/api/auth'));
+app.use("/", require("./routes/api/verifyToken"))

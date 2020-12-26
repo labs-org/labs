@@ -32,21 +32,37 @@ export default class Login extends Component {
     e.preventDefault();
     //where we set the state and send it in the post request
         const user = {
-          username: this.state.username,
+          email: this.state.email,
           password: this.state.password
         } 
         
-        axios.post("http://localhost:3000/login", user)
+        axios.post("/login", user)
         .then(response =>{
       console.log (response)
       console.log(response.user.data)
-      //  localStorage.setItem('token', response.data.token);
-      //  localStorage.setItem('username', response.data.user.username);
+       localStorage.setItem('token', response.data.token);
+        localStorage.setItem('labName', response.data.user.labName);
        console.log(response.data.user.phone)
-      window.location = '/AddPost'
+      window.location = '/Personalprofile'
         })
-        .catch(err =>alert("username or password is incorrect") );         
-    }       
+        .catch(err =>alert("email or password is incorrect") );         
+    }     
+    
+  // onSubmit = () => {
+
+  //   fetch('http://localhost:3000/login', {
+  //   method: 'post',
+  //   headers: {'Content-Type': 'application/json'},
+  //   body: JSON.stringify({
+  //     email: this.state.email,
+  //     password: this.state.password
+  //   })
+  //     }).then( response => response.json()).then(data => {
+  //   if (data === 'success'){
+  //     this.props.onRouteChange('home');
+  //     }
+  //    })
+  //   }  
       
   
 
@@ -100,7 +116,7 @@ export default class Login extends Component {
             <br></br>
             <br></br>
             <p>
-              Don't have an account? <a href="/addUser"> Sign Up</a>
+              Don't have an account? <a href="/User"> Sign Up</a>
             </p>
           </form>
         </div>
