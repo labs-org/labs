@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Link } from "react-router-dom";
-
+// import { Link } from "react-router-dom";
 // import { Router} from "react-router-dom";
 
 
@@ -10,7 +9,7 @@ const Post = (props) => (
   <tr>
     <td>{props.item.testType}</td>
     <td>{props.item.price}</td>
-    <td>
+    {/* <td>
       <Link
         to={"/edit/" + props.item._id}
         className="btn btn-deep-orange darken-4"
@@ -26,7 +25,7 @@ const Post = (props) => (
       >
         Delete
       </button>
-    </td>
+    </td> */}
   
  </tr>
 
@@ -36,7 +35,7 @@ const Post = (props) => (
 class AllLabs extends Component {
   constructor(props) {
     super(props);
-    this.deletePost = this.deletePost.bind(this);
+    // this.deletePost = this.deletePost.bind(this);
     
     this.state = {
       items: [],
@@ -51,14 +50,14 @@ class AllLabs extends Component {
                   }) 
                  }
 
-                 deletePost(id) {
-                  axios
-                    .delete("http://localhost:3000/addPost/" + id)
-                    .then((res) => console.log(res.data));
-                  this.setState({
-                    items: this.state.items.filter((el) => el._id !== id),
-                  });
-                }
+                //  deletePost(id) {
+                //   axios
+                //     .delete("http://localhost:3000/addPost/" + id)
+                //     .then((res) => console.log(res.data));
+                //   this.setState({
+                //     items: this.state.items.filter((el) => el._id !== id),
+                //   });
+                // }
 
 
   

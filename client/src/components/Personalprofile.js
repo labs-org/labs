@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
-import { storage } from "./firebase.js";
+import React from 'react';
 import axios from "axios";
 import {  Link,withRouter } from "react-router-dom" ;
-import Footer from './Footer';
-// var imgModel = require('../../backend/models/user.model');
 
 const Profileuser= props => (
   <tr>
@@ -14,11 +11,7 @@ const Profileuser= props => (
       <td>{props.user.location}</td>
       <td>{props.user.phone}</td>  
       <td>{props.user.officialWebSite}</td>         
-                                             {/* // i dont Know if it right  */}
-      <td>
-      {/* <img src= {props.user.image} width="200" height="200" class="w3-round" alt="Norway"/> */}
-      {/* <img src={props.user.url || "http://via.placeholder.com/50 50"} alt="firebase-image" width="200" height="200" class="w3-round"   /> */}
-      </td>
+     
       <td>
       <Link to ={"/edituser/"+props.user._id} className="btn btn-deep-orange darken-4" >Edit User</Link>
       <button type = "button" 
@@ -53,20 +46,17 @@ class Personalprofile extends React.Component {
     constructor(props) {
       super(props);
       this.deleteUser = this.deleteUser.bind(this);
+      // this.deletePost = this.deletePost.bind(this);
       this.state = {
         users:[],
         Data:[],
-        userName:[],
-        image:null,
-        url :'',
-        progress:0,
-        Info:[],
+        labName:[],
       items:[],
            };
     
     }
     componentDidMount() {
-      axios.get("http://localhost:3000/addUser/")   
+      axios.get("http://localhost:3000/User/")   
          .then( res => {
              this.setState({users : res.data})
            
@@ -75,7 +65,7 @@ class Personalprofile extends React.Component {
              console.log(error);
          });
 
-         axios.get("http://localhost:3000/addItems/")   
+         axios.get("http://localhost:3000/addPost/")   
          .then( res => {
            var newitems=[]
            for(var i =0 ; i< res.data.length;i++){
@@ -90,9 +80,10 @@ class Personalprofile extends React.Component {
          .catch((error) => {
              console.log(error);
          })
+         
  }
  deleteUser(id) {
-  axios.delete("http://localhost:3000/addUser/" + id)    /// sent this req to the middleware in the index.js server
+  axios.delete("http://localhost:3000/User/" + id)
       .then(res => console.log(res.data));
   this.setState({
       users: this.state.users.filter(el => el._id !== id)
@@ -100,11 +91,11 @@ class Personalprofile extends React.Component {
 }
 
 
-deleteItem(id) {
-  axios.delete("http://localhost:3000/addItems/" + id)
+deletePost(id) {
+  axios.delete("http://localhost:3000/addPost/" + id)
       .then(res => console.log(res.data));
   this.setState({
-      items: this.state.items.filter(el => el._id !== id)
+    items: this.state.items.filter((el) => el._id !== id),
   })
 }
 
@@ -114,76 +105,25 @@ deleteItem(id) {
  usersList() {
   let listedusers = (this.state.Data.length >0)? this.state.data :this.state.users;
 
-  return listedusers.filter(elet=> localStorage.getItem('username') === elet.username).map(currentUser => {
-    return <Profileuser user= { currentUser } deleteUser = { this.deleteUser} key = { currentUser._id }/>; 
+  return listedusers.filter(elet=> localStorage.getItem('email') === elet.email).map(currentEmail => {
+    return <Profileuser user= { currentEmail } deleteUser = { this.deleteUser} key = { currentEmail._id }/>; 
   })
 } 
 
 itemsList() {
-  let listeditem = this.state.items;
+  // let listeditem = this.state.items;
 
-  return listeditem.map(currentItem => {
-    return <Profileitems item= { currentItem } deleteItem= { this.deleteItem} key = { currentItem._id }/>; 
-  })
-} 
-
-
-
-// usersList() {
-//   let listedusers = (this.st
-//     ate.Data.length >0)? this.state.data :this.state.users;
-
-//   return listedusers.filter(elet => localStorage.getItem('username')=== elet.username).map((ele,index) =>{
-//     return <Profileuser user= { ele.username}  deleteUser = { this.deleteUser} key = { ele._id }  address = { ele.address} phone = { ele.phone }/>; 
-//   })
+  // return listeditem.map(currentItem => {
+  //   return <Profileitems item= { currentItem } deleteItem= { this.deleteItem} key = { currentItem._id }/>; 
+  // })
+  return this.state.items.map(currentitem => { 
+    // console.log(currentitem._id)   
   
-// } 
-
-
-
-
-
-
-
-
-
-    // it addes the values of the input fileds in the states
-    handleChangeImage(e) {
-          if (e.target.files[0]) {
-              this.setState({
-              image: e.target.files[0]
-              })
-          }
-        
-      }
-     // it handles the upload of the picture in the firbase
-      handleUpload () {
-        var uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
-          uploadTask.on(
-            "state_changed",
-            snapshot => {
-              var progress = Math.round(
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-              );
-              this.setState({
-                progress:progress})
-              },
-              error => {
-              console.log(error);
-             },
-              () => {
-                storage
-                .ref("images")
-                .child(this.state.image.name)
-                .getDownloadURL()
-                .then(url => {
-                  this.setState({
-                    url : url
-                })
-                });
-                }
-                );
-             }
+       return <Profileitems item={currentitem} 
+       deletePost={this.deletePost}
+       key={currentitem._id} />    }) 
+} 
+ 
   
              render() {
                 return (
@@ -193,49 +133,32 @@ itemsList() {
                   <h2>Hello User</h2>
                    <p>  user information </p>
                 <table className = "table">
-                <thead className = "thead">
-                    <tr>
-                        <th>User Name</th>
-                        <th>Password</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Image </th>
-                    </tr>
-                </thead>
+               
                 <tbody>
                     {this.usersList()}
-                    {/* {this.itemsList()} */}
+                    {this.itemsList()}
                    
                 </tbody>
                 <thead className = "thead">
                     <tr>
-                        <th>User Name</th>
+                    <th>Email</th>
                         <th>Password</th>
+                        <th>lab name</th>
                         <th>Phone</th>
-                        <th>Address</th>
+                        <th>location</th>
+                        <th>Official web site</th>
                         
                     </tr>
                 </thead>
                 <tbody>
                   
-                    {this.itemsList()}
-                   
+                    {this.itemsList()}                   
                 </tbody>
-                
-
-               </table>
+              </table>
 
                </div>
-                            <div className = "col">
-                            <label>Image</label>
-                           <div  id='image' > <img src={this.state.url || "http://via.placeholder.com/50 50"} 
-                            alt="firebase"  /></div> 
-                           <input  type="file" onChange={this.handleChangeImage.bind(this)} className="btn btn-deep-orange darken-4" />
-                           <button  onClick={this.handleUpload.bind(this)} className="btn btn-deep-orange darken-4">Upload</button>
-                           </div>
-                            <br />
-                           
-                    <Footer />
+                   <br />
+                
                   </div>
                     
                 )

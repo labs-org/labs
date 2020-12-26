@@ -40,8 +40,8 @@ export default class Login extends Component {
         .then(response =>{
       console.log (response)
       console.log(response.user.data)
-       localStorage.setItem('token', response.data.token);
-       localStorage.setItem('username', response.data.user.username);
+      //  localStorage.setItem('token', response.data.token);
+      //  localStorage.setItem('username', response.data.user.username);
        console.log(response.data.user.phone)
       window.location = '/AddPost'
         })

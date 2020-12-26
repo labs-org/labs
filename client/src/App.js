@@ -13,6 +13,7 @@ import {NoMatch} from "./components/NoMatch";
 import {Layout} from "./components/Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Jumbotron } from './components/Jumbotron';
+import  Personalprofile from './components/Personalprofile';
 import Signup from './components/Signup';
 import Edituser from './components/edituser';
 import EditPost from './components/edit';
@@ -35,6 +36,7 @@ class App extends Component {
               <Route path = "/login" component = { Login } />
               <Route path = "/edit/:id" component = { EditPost }/>
               <Route path = "/edituser/:id" component = { Edituser}/>
+              <Route path = "/personalprofile" component = {Personalprofile} />
               <Route path = "/User"  component = { Signup } />
               <Route component={NoMatch} />
             </Switch>
