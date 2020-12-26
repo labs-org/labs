@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import {Button} from "reactstrap";
-import $ from "jquery"
+// import $ from "jquery"
 
 
 //creat a class for the sign up component 
@@ -80,38 +80,34 @@ export default class Signup extends Component {
               officialWebsite: this.state.officalWebSite,
             }
            
-          //   axios.post("http://localhost:3000/User", user)
-          //   .then(res => {
-          //    window.location = '/login'
-          //    console.log('user added') 
+            axios.post("http://localhost:3000/User", user)
+            .then(res => {
+             window.location = '/login'
+             console.log('user added') 
 
-          //   })  
-          //  .catch(err => alert('Email or phone number is used') );
+            })  
+           .catch(err => alert('Email or phone number is used') );
               
 
-          $.ajax ({
-            method: "POST",
-            url: "http://localhost:3000/User",
-            data: JSON.stringify({user: user}),
-            contentType : "application/json",
-            success : function () {
-              console.log('user added successfully')
-              window.location = '/login'
-            },
+          // $.ajax ({
+          //   method: "POST",
+          //   url: "http://localhost:3000/User/User",
+          //   data: JSON.stringify({user: user}),
+          //   contentType : "application/json",
+          //   success : function () {
+          //     console.log('user added successfully')
+          //     window.location = '/login'
+          //     console.log(user)
+          //   },
               
-              // error : function (err) {
-              //   console.log(err)
-              // }
-              error: (xhr) => {
-                if (xhr.status === 201) {
-                  this.success(null, "Created", xhr);
-                  return;
-                
-                }
-              },
+          //     error : function (err) {
+          //       console.log(err)
+          //       console.log('failed')
+          //     }
+             
     
           
-          })
+          // })
         }
         
         

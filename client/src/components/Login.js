@@ -36,12 +36,12 @@ export default class Login extends Component {
           password: this.state.password
         } 
         
-        axios.post("/login", user)
+        axios.post("User/login", user)
         .then(response =>{
       console.log (response)
       console.log(response.user.data)
-       localStorage.setItem('token', response.data.token);
-        localStorage.setItem('labName', response.data.user.labName);
+      //  localStorage.setItem('token', response.data.token);
+      //   localStorage.setItem('labName', response.data.user.labName);
        console.log(response.data.user.phone)
       window.location = '/Personalprofile'
         })
@@ -116,7 +116,7 @@ export default class Login extends Component {
             <br></br>
             <br></br>
             <p>
-              Don't have an account? <a href="/User"> Sign Up</a>
+              Don't have an account? <a href="/addUser"> Sign Up</a>
             </p>
           </form>
         </div>
