@@ -13,29 +13,32 @@ const UserSchema = new mongoose.Schema({
     },
     labName: {
         type: String,
+        minlength:3,
         required: true,
         unique: true
     },
    
     location: {
         type: String,
+        minlength: 4,
         required: true,
         unique: true
     },
     phone: {
         type: Number,
-        required: true,
-        unique: true
+         unique:true,
+        min:10,
+        trim: true,
     },
     // avatar: {
     //     type: String,
     //     required: false
     // },
-    // officialWebsite: {
-    //     type: String,
-    //     required: true,
-    //     unique: true
-    // },
+    officialWebsite: {
+        type: String,
+        required: true,
+        unique: true
+    },
     date : {
         type: Date,
         default: Date.now
