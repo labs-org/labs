@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 var cors = require('cors');
 const bodyParser = require('body-parser');
+require("dotenv").config();
 
 
 const app = express();
@@ -33,6 +34,5 @@ app.listen(port, () => console.log(`server started on port ${port}`));
 
 // using routes
 app.use('/', require('./routes/api/items'));
-app.use('/', require('./routes/api/users'));
-// app.use('/auth', require('./routes/api/auth'));
-app.use("/", require("./routes/api/verifyToken"))
+app.use('/users', require('./routes/api/users'));
+// app.use("/", require("./routes/api/verifyToken"))

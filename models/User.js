@@ -31,11 +31,11 @@ const UserSchema = new mongoose.Schema({
     //     type: String,
     //     required: false
     // },
-    officialWebsite: {
-        type: String,
-        required: true,
-        unique: true
-    },
+    // officialWebsite: {
+    //     type: String,
+    //     required: true,
+    //     unique: true
+    // },
     date : {
         type: Date,
         default: Date.now

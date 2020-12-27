@@ -1,6 +1,7 @@
 import React from 'react';
-import  { Component } from 'react';
-import Login from "./components/Login"
+import  { useState, useEffect } from "react";
+// import  { Component } from 'react';
+import Login from "./components/auth/Login";
 import AppNavbar from "./components/AppNavbar";
 import AllLabs from "./components/AllLabs";
 import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
@@ -13,15 +14,50 @@ import {Layout} from "./components/Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Jumbotron } from './components/Jumbotron';
 import  Personalprofile from './components/Personalprofile';
-import Signup from './components/Signup';
+// import Signup from './components/Signup';
 import Edituser from './components/edituser';
 import EditPost from './components/edit';
+import UserContext from "./context/userContext";
+import Register from "./components/auth/Register";
+import Axios from "axios";
 
 
-class App extends Component {
-  render() {
-    return (
+export default function App() {
+  const [userData, setUserData] = useState({
+    token: undefined,
+    user: undefined,
+  });
+
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      let token = localStorage.getItem("auth-token");
+      if (token === null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
+      const tokenRes = await Axios.post(
+        "http://localhost:3000/users/tokenIsValid",
+        null,
+        { headers: { "x-auth-token": token } }
+      );
+      if (tokenRes.data) {
+        const userRes = await Axios.get("http://localhost:3000/users/", {
+          headers: { "x-auth-token": token },
+        });
+        setUserData({
+          token,
+          user: userRes.data,
+        });
+      }
+    };
+
+    checkLoggedIn();
+  }, []);
+
+  return (
+    
       <React.Fragment>
+         <UserContext.Provider value={{ userData, setUserData }}>
         <Router>
           <AppNavbar />
           <Jumbotron />
@@ -36,14 +72,15 @@ class App extends Component {
               <Route path = "/edit/:id" component = { EditPost }/>
               <Route path = "/edituser/:id" component = { Edituser}/>
               <Route path = "/personalprofile" component = {Personalprofile} />
-              <Route path = "/User"  component = { Signup } />
+              {/* <Route path = "/add"  component = { Signup } /> */}
+              <Route path = "/register" component = {Register} />
               <Route component={NoMatch} />
             </Switch>
           </Layout>
         </Router>
+        </UserContext.Provider>
       </React.Fragment>
     );
   }
-}
 
-export default App;
+
