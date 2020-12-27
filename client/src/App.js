@@ -14,7 +14,6 @@ import {Layout} from "./components/Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Jumbotron } from './components/Jumbotron';
 import  Personalprofile from './components/Personalprofile';
-// import Signup from './components/Signup';
 import Edituser from './components/edituser';
 import EditPost from './components/edit';
 import UserContext from "./context/userContext";

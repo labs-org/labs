@@ -22,9 +22,11 @@ router.get("/fetch", async (req, res) => {
 router.route('/add').post((req, res) => {
   const testType = req.body.testType;
   const price = req.body.price;
+  const image = req.body.image;
   const newItem = new Item({
     testType,
-    price
+    price,
+    image
   });
 
   // saving the new item in the data base by .save method 
@@ -36,28 +38,29 @@ router.route('/add').post((req, res) => {
 //GET item by ID  becouse i want to delete and update this items  /we will use find by id method and how ? by get the id by (req.params.id)
 router.route("/:id").get((req, res) => {
   Item.findById(req.params.id)
-  .then(items => res.json(items))
-  .catch(err => res.status(400).json("Error: " + err));
+    .then(items => res.json(items))
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
 //DELETE item by ID
 router.route("/:id").delete((req, res) => {
   Item.findByIdAndDelete(req.params.id)
-  .then(() => res.json('Item is deleted!'))
-  .catch(err => res.status(400).json("Error: " + err));
+    .then(() => res.json('Item is deleted!'))
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
 //UPDATE item by ID
 router.route("/update/:id", ).post((req, res) => {
   Item.findById(req.params.id)
-  .then(items => {
-    items.testType = req.body.testType;
-    items.price = req.body.price;
-  
-    items.save()
-    .then(() => res.json("Post is updated!"))
-    .catch(err => res.status(400).json('Error: ' + err));
-  })
+    .then(items => {
+      items.testType = req.body.testType;
+      items.price = req.body.price;
+      items.image = req.body.image;
+
+      items.save()
+        .then(() => res.json("Post is updated!"))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
     .catch(err => res.status(400).json('Error: ' + err));
 })
 

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
 import $ from "jquery";
 import {Button} from "reactstrap";
+import { storage } from "./firebase.js";
 // import AllLabs from "./AllLabs"
 
 
@@ -15,11 +16,15 @@ class AddPost extends Component {
     //Defining the "this" in the functions using .bind method
     this.onChangeTestType = this.onChangeTestType.bind(this);
     this.onChangePrice= this.onChangePrice.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
   this.state= {    
       testType : '',
-      price: '' 
+      price: '' ,
+      image:null,
+      url :'',
+      progress:0,
   }
 }
 onChangeTestType(e) {
@@ -33,12 +38,55 @@ onChangeTestType(e) {
     });
   }
 
+    // it addes the values of the input fileds in the states so we add the image from fire base 
+    handleChangeImage(e) {
+      if (e.target.files[0]) {
+          this.setState({
+          image: e.target.files[0]
+          })
+      }
+    
+  }
+
+  handleUpload () {
+    var uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          var progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          this.setState({
+            progress:progress})
+          },
+          error => {
+          console.log(error);
+         },
+          () => {
+            storage
+            .ref("images")
+            .child(this.state.image.name)
+            .getDownloadURL()
+            .then(url => {
+              this.setState({
+                url : url
+            })
+            });
+
+            }
+
+            );
+            
+         }
+
 
   onSubmit(e) {  
     e.preventDefault();
     const item = {
+      labName:localStorage.getItem('labName'),
       testType: this.state.testType,
-      price: this.state.price
+      price: this.state.price,
+      image: this.state.url,
          }
 
     console.log(item);
@@ -95,8 +143,16 @@ onChangeTestType(e) {
                   text-align = "center"
                   placeholder = "Enter your price"/>
                 </div>
+
+                <div className = "col">
+                            <label>Image</label>
+                           <div  id='image' > <img src={this.state.url || "http://via.placeholder.com/50*50"} 
+                            alt="firebase"  /></div> 
+                           <input  type="file" onChange={this.handleChangeImage.bind(this)} className="btn btn-deep-orange darken-4" />
+                           <button  onClick={this.handleUpload.bind(this)} className="btn btn-deep-orange darken-4">Upload</button>
+                           </div>
                    <div>
-                <Button color="primary" type="submit" onClick= {this.onSubmit} className="btn btn-deep-orange darken-4">Submit</Button>
+                <Button color="primary" onClick= {this.onSubmit} className="btn btn-deep-orange darken-4">Submit</Button>
                 </div>
 
                 

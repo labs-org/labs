@@ -9,6 +9,16 @@ const Post = (props) => (
   <tr>
     <td>{props.item.testType}</td>
     <td>{props.item.price}</td>
+
+    <td>
+      <img
+        src={props.item.image}
+        width="200"
+        height="200"
+        class="w3-round"
+        alt="Norway"
+      />
+    </td>
     {/* <td>
       <Link
         to={"/edit/" + props.item._id}

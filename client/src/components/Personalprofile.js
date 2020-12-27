@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
-import { storage } from "./firebase.js";
+// import { storage } from "./firebase.js";
 
 
 
@@ -15,16 +15,11 @@ const Profileuser = props => (
       <td>{props.user.location}</td>
       <td>{props.user.phone}</td>
       <td>{props.user.officialWebSite}</td>
-      {/* <td>{props.user.image}</td>  */}
-
-      {/* <td>
-      <img src= {props.user.image} width="200" height="200" class="w3-round" alt="Norway"/>
-      <img src={props.user.url || "http://via.placeholder.com/50 50"} alt="firebase-image" width="200" height="200" class="w3-round"   />
-      </td> */}
+     
 
 
       <td>
-      <Link to ={"/edituser/"+props.user._id} className="btn btn-deep-orange darken-4" >Edit User</Link>
+      <Link to ={"/edit/"+props.user._id} className="btn btn-deep-orange darken-4" >Edit User</Link>
       <button type = "button"
       className="btn btn-deep-orange darken-4"
       onClick = {() => {props.deleteUser(props.user._id)}}> Delete User
@@ -37,12 +32,8 @@ const Profileitems = (props) => (
   <tr>
     <td>{props.item.testType}</td>
     <td>{props.item.price}</td>
-    <td>{props.item.image}</td>
-      
-    {/* <td>
-      <img src= {props.user.image} width="200" height="200" class="w3-round" alt="Norway"/>
-      <img src={props.user.url || "http://via.placeholder.com/50 50"} alt="firebase-image" width="200" height="200" class="w3-round"   />
-       </td> */}
+    {/* <td>{props.item.image}</td> */}
+    
 
 
     <td>
@@ -78,7 +69,7 @@ class Personalprofile extends React.Component {
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:3000/users/")
+    axios.get("http://localhost:3000/register/")
        .then( res => {
            this.setState({users : res.data})
 
@@ -149,43 +140,44 @@ class Personalprofile extends React.Component {
   }
 
   // it addes the values of the input fileds in the states
-  handleChangeImage(e) {
-    if (e.target.files[0]) {
-        this.setState({
-        image: e.target.files[0]
-        })
-    }
+//   handleChangeImage(e) {
+//     if (e.target.files[0]) {
+//         this.setState({
+//         image: e.target.files[0]
+//         })
+       
+//     }
   
-}
+// }
 
  // it handles the upload of the picture in the firbase
- handleUpload () {
-  var uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        var progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        this.setState({
-          progress:progress})
-        },
-        error => {
-        console.log(error);
-       },
-        () => {
-          storage
-          .ref("images")
-          .child(this.state.image.name)
-          .getDownloadURL()
-          .then(url => {
-            this.setState({
-              url : url
-          })
-          });
-          }
-          );
-       }
+//  handleUpload () {
+//   var uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+//     uploadTask.on(
+//       "state_changed",
+//       snapshot => {
+//         var progress = Math.round(
+//           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+//         );
+//         this.setState({
+//           progress:progress})
+//         },
+//         error => {
+//         console.log(error);
+//        },
+//         () => {
+//           storage
+//           .ref("images")
+//           .child(this.state.image.name)
+//           .getDownloadURL()
+//           .then(url => {
+//             this.setState({
+//               url : url
+//           })
+//           });
+//           }
+//           );
+//        }
 
 
   render() {
@@ -206,11 +198,11 @@ class Personalprofile extends React.Component {
           </table>
         </div>
         <div className = "col">
-                            <label>Image</label>
+                            {/* <label>Image</label>
                            <div  id='image' > <img src={this.state.url || "http://via.placeholder.com/50 50"} 
                             alt="firebase"  /></div> 
-                           <input  type="file" onChange={this.handleChangeImage.bind(this)} className="btn btn-deep-orange darken-4" />
-                           <button  onClick={this.handleUpload.bind(this)} className="btn btn-deep-orange darken-4">Upload</button>
+                           <input  type="file" onChange={this.handleChangeImage.bind(this)} className="btn btn-deep-orange darken-4" /> */}
+                           {/* <button  onClick={this.handleUpload.bind(this)} className="btn btn-deep-orange darken-4">Upload</button> */}
                            </div>
         <br />
       </div>
