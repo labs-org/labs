@@ -13,24 +13,37 @@ const UserSchema = new mongoose.Schema({
     },
     labName: {
         type: String,
+        minlength:3,
         required: true,
         unique: true
     },
-
-    avatar: {
+   
+    location: {
         type: String,
-        required: false
+        minlength: 4,
+        required: true,
+        unique: true
     },
+    phone: {
+        type: Number,
+         unique:true,
+        min:10,
+        trim: true,
+    },
+    // avatar: {
+    //     type: String,
+    //     required: false
+    // },
     officialWebsite: {
         type: String,
         required: true,
-        // unique: true
+        unique: true
     },
-    date: {
+    date : {
         type: Date,
         default: Date.now
     }
 })
 
 
-module.exports = User = mongoose.model('user', UserSchema);
+module.exports = User = mongoose.model('user', UserSchema );
