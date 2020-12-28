@@ -21,7 +21,7 @@ export default class EditPost extends Component {
 
 
   componentDidMount() {
-    axios.get('http://localhost:3000/fetch/'+this.props.match.params.id)
+    axios.get('http://localhost:3000/addItems/update'+this.props.match.params.id)
     
       .then(response => {
         this.setState({
@@ -60,8 +60,9 @@ export default class EditPost extends Component {
 
     console.log(item);
 
-    axios.post("http://localhost:3000/update/"+this.props.match.params.id, item)
+    axios.post("/update/"+this.props.match.params.id, item)
       .then(res => console.log(res.data));
+      console.log("updated")
 // go bact to all labs page after update the post
     window.location = '/AllLabs'
   }

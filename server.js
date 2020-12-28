@@ -26,13 +26,12 @@ mongoose
     .then(() => console.log('mongoDB connected'))
     .catch((err) => console.log(err));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 
 
 app.listen(port, () => console.log(`server started on port ${port}`));
 
 // using routes
-app.use('/', require('./routes/api/items'));
+app.use('/addItems', require('./routes/api/items'));
 app.use('/users', require('./routes/api/users'));
-// app.use("/", require("./routes/api/verifyToken"))

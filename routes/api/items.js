@@ -11,11 +11,11 @@ app.use(bodyParser.urlencoded({
 }));
 
 //route get the item
-
-router.get("/fetch", async (req, res) => {
+router.get("/", async (req, res) => {
   Item.find()
     .then((ItemSchema) => res.json(ItemSchema))
-    .catch((err) => res.status(400).json("Error: " + err));
+    .catch((err) => res.status(400).json("error here" + err));
+  
 });
 
 //route create the item

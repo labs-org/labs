@@ -18,8 +18,7 @@ export default class Edituser extends Component {
 
 
       this.onSubmit = this.onSubmit.bind(this);
-     
-  
+    
       this.state = {
         email: "",
         password: "",
@@ -34,7 +33,7 @@ export default class Edituser extends Component {
 
 
        componentDidMount() {
-        axios.get('http://localhost:3000/addUser/'+this.props.match.params.id)
+        axios.get('http://localhost:3000/users/'+this.props.match.params.id)
 
         
           .then(response => {
@@ -109,7 +108,7 @@ export default class Edituser extends Component {
 
 
 
-axios.post("http://localhost:3000/addUser/update/"+this.props.match.params.id, user)
+axios.post("http://localhost:3000/users/update/"+this.props.match.params.id, user)
       .then(res => console.log(res.data));
 
     window.location = '/AllLabs'

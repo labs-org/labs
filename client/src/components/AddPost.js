@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-// import axios from "axios";
-// import { Link } from "react-router-dom";
 import $ from "jquery";
 import {Button} from "reactstrap";
 import { storage } from "./firebase.js";
-// import AllLabs from "./AllLabs"
-
-
 
 
 class AddPost extends Component {
@@ -93,7 +88,7 @@ onChangeTestType(e) {
 
       $.ajax ({
         method: "POST",
-        url: "/add",
+        url: "addItems/add",
         data: JSON.stringify(item),
         contentType : "application/json",
         success : function () {

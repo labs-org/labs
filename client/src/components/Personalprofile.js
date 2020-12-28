@@ -1,40 +1,42 @@
 import React from 'react';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
-// import { storage } from "./firebase.js";
 
-
-
-
-const Profileuser = props => (
+const Profileuser = (props) => (
   <tr>
+    <td>{props.user.email}</td>
+    <td>{props.user.password}</td>
+    <td>{props.user.labName}</td>
+    <td>{props.user.location}</td>
+    <td>{props.user.phone}</td>
+    <td>{props.user.officialWebSite}</td>
 
-      <td>{props.user.email}</td>
-      <td>{props.user.password}</td>
-      <td>{props.user.labName}</td>
-      <td>{props.user.location}</td>
-      <td>{props.user.phone}</td>
-      <td>{props.user.officialWebSite}</td>
-     
-
-
-      <td>
-      <Link to ={"/edit/"+props.user._id} className="btn btn-deep-orange darken-4" >Edit User</Link>
-      <button type = "button"
-      className="btn btn-deep-orange darken-4"
-      onClick = {() => {props.deleteUser(props.user._id)}}> Delete User
+    <td>
+      <Link
+        to={'/edituser/' + props.user._id}
+        className="btn btn-deep-orange darken-4"
+      >
+        Edit User
+      </Link>
+      <button
+        type="button"
+        className="btn btn-deep-orange darken-4"
+        onClick={() => {
+          props.deleteUser(props.user._id);
+        }}
+      >
+        {' '}
+        Delete User
       </button>
-      </td>
+    </td>
   </tr>
-)
+);
 
 const Profileitems = (props) => (
   <tr>
     <td>{props.item.testType}</td>
     <td>{props.item.price}</td>
-    {/* <td>{props.item.image}</td> */}
-    
-
+    <td>{props.item.image}</td>
 
     <td>
       <Link
@@ -59,7 +61,7 @@ const Profileitems = (props) => (
 class Personalprofile extends React.Component {
   constructor(props) {
     super(props);
-    this.deleteUser = this.deleteUser.bind(this);
+    // this.deleteUser = this.deleteUser.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.state = {
       users: [],
@@ -69,60 +71,68 @@ class Personalprofile extends React.Component {
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:3000/register/")
-       .then( res => {
-           this.setState({users : res.data})
-
-       })
-       .catch((error) => {
-           console.log(error);
-       });
-
-     axios.get("/fetch")
-     .then( res => {
-       var newitems=[];
-       for(var i =0 ; i< res.data.length;i++){
-         if(res.data[i].labName === localStorage.getItem('labName')){
-            newitems.push(res.data[i])
-         }
-       }
-
-         this.setState({items: newitems})
-        //  console.log(res.data)
-     })
-     .catch((error) => {
-         console.log(error);
-     })
     axios
-      .get('/fetch')
-      .then((response) => {
-        this.setState({ items: response.data });
+      .get('http://localhost:4000/users/register')
+      .then((res) => {
+        this.setState({ users: res.data });
       })
+
       .catch((error) => {
         console.log(error);
       });
+
+    axios.get('/addItems').then(
+      (res) => {
+        var newitems = [];
+        console.log(res.data);
+        for (var i = 0; i < res.data.length; i++) {
+          if (res.data[i].labName === localStorage.getItem('labName')) {
+            newitems.push(res.data[i]);
+          }
+        }
+
+        this.setState({ items: newitems });
+        //  console.log(res.data)
+      }
+      //  .then((res) => {
+      //     // console.log(res.data.length);
+      //     this.setState({ items: res.data });
+      //   }
+      //  )
+      //  .catch((error) => {
+      //      console.log(error);
+      //  })
+    );
   }
-   deleteUser(id) {
-    axios.delete("/users" + id)
-        .then(res => console.log(res.data));
+  deleteUser(id) {
+    axios.delete('/register' + id).then((res) => console.log(res.data));
     this.setState({
-        users: this.state.users.filter(el => el._id !== id)
-    })
+      users: this.state.users.filter((el) => el._id !== id),
+    });
   }
 
   deletePost(id) {
-    axios.delete('/fetch' + id).then((res) => console.log(res.data));
+    axios.delete('/addItems/' + id).then((res) => console.log(res.data));
     this.setState({
       items: this.state.items.filter((el) => el._id !== id),
     });
   }
 
-   usersList() {
-    let listedusers = (this.state.Data.length >0)? this.state.data :this.state.users;
+  usersList() {
+    let listedusers =
+      this.state.Data.length > 0 ? this.state.data : this.state.users;
 
-    return listedusers.filter(elet=> localStorage.getItem('email') === elet.email).map(currentEmail => {
-      return <Profileuser user= { currentEmail } deleteUser = { this.deleteUser} key = { currentEmail._id }/>;
-    })
+    return listedusers
+      .filter((elet) => localStorage.getItem('labName') === elet.labName)
+      .map((currentLabName) => {
+        return (
+          <Profileuser
+            user={currentLabName}
+            deleteUser={this.deleteUser}
+            key={currentLabName._id}
+          />
+        );
+      });
   }
 
   itemsList() {
@@ -139,71 +149,25 @@ class Personalprofile extends React.Component {
     });
   }
 
-  // it addes the values of the input fileds in the states
-//   handleChangeImage(e) {
-//     if (e.target.files[0]) {
-//         this.setState({
-//         image: e.target.files[0]
-//         })
-       
-//     }
-  
-// }
-
- // it handles the upload of the picture in the firbase
-//  handleUpload () {
-//   var uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
-//     uploadTask.on(
-//       "state_changed",
-//       snapshot => {
-//         var progress = Math.round(
-//           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-//         );
-//         this.setState({
-//           progress:progress})
-//         },
-//         error => {
-//         console.log(error);
-//        },
-//         () => {
-//           storage
-//           .ref("images")
-//           .child(this.state.image.name)
-//           .getDownloadURL()
-//           .then(url => {
-//             this.setState({
-//               url : url
-//           })
-//           });
-//           }
-//           );
-//        }
-
-
   render() {
     return (
       <div>
         <br />
         <div className="container text-center border border-light p-9">
-          {/* <h2>Hello User</h2> */}
+          <b>
+            Want to Post Anything?<a href="/AddPost"> Add Post </a>
+          </b>
+          <br></br>
           <p> user information </p>
           <table className="table">
             <tbody>
               {this.usersList()}
               {this.itemsList()}
-           
             </tbody>
-         
-            <tbody>{this.itemsList()}</tbody>
+
+            {/* <tbody>{this.itemsList()}</tbody> */}
           </table>
         </div>
-        <div className = "col">
-                            {/* <label>Image</label>
-                           <div  id='image' > <img src={this.state.url || "http://via.placeholder.com/50 50"} 
-                            alt="firebase"  /></div> 
-                           <input  type="file" onChange={this.handleChangeImage.bind(this)} className="btn btn-deep-orange darken-4" /> */}
-                           {/* <button  onClick={this.handleUpload.bind(this)} className="btn btn-deep-orange darken-4">Upload</button> */}
-                           </div>
         <br />
       </div>
     );
