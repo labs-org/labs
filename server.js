@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 var cors = require('cors');
 const bodyParser = require('body-parser');
 require("dotenv").config();
+const path = require('path'); 
 
 
 const app = express();
@@ -14,7 +15,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-
+// app.use(express.static(path.join(__dirname, 'public')))
+// app.get('*', (req,res) => res.sendFile(path.join(__dirname, '/')))
 const db = require('./config/keys').mongoURI;
 
 mongoose
@@ -26,7 +28,7 @@ mongoose
     .then(() => console.log('mongoDB connected'))
     .catch((err) => console.log(err));
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 
 

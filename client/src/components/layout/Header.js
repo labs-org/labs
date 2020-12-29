@@ -1,6 +1,7 @@
-import React from "react";
+import React , {useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthOptions from "../auth/AuthOptions";
+// import UserContext from "../../context/userContext";
 
 export default function Header() {
   const userContext = useContext(userContext);

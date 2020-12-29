@@ -33,6 +33,7 @@ const Profileuser = (props) => (
 );
 
 const Profileitems = (props) => (
+  
   <tr>
     <td>{props.item.testType}</td>
     <td>{props.item.price}</td>
@@ -49,6 +50,7 @@ const Profileitems = (props) => (
         type="button"
         className="btn btn-deep-orange darken-4"
         onClick={() => {
+          console.log(props)
           props.deletePost(props.item._id);
         }}
       >
@@ -72,47 +74,53 @@ class Personalprofile extends React.Component {
   }
   componentDidMount() {
     axios
-      .get('http://localhost:4000/users/register')
+      .get('http://127.0.0.1:3000/users/register')
       .then((res) => {
         this.setState({ users: res.data });
       })
-
       .catch((error) => {
         console.log(error);
       });
 
-    axios.get('/addItems').then(
-      (res) => {
-        var newitems = [];
-        console.log(res.data);
-        for (var i = 0; i < res.data.length; i++) {
-          if (res.data[i].labName === localStorage.getItem('labName')) {
-            newitems.push(res.data[i]);
-          }
-        }
+    axios.get('http://127.0.0.1:3000/addItems')
+    // , {
+    //   headers: {
+    //     'Authorization': `Basic ${token}` 
+    //   }
+    // }
+    // .then(
+    //   (res) => {
+    //     var newitems = [];
+    //     console.log(res.data);
+    //     for (var i = 0; i < res.data.length; i++) {
+    //       if (res.data[i].email === localStorage.getItem('email')) {
+    //         newitems.push(res.data[i]);
+    //       }
+    //     }
 
-        this.setState({ items: newitems });
-        //  console.log(res.data)
-      }
-      //  .then((res) => {
-      //     // console.log(res.data.length);
-      //     this.setState({ items: res.data });
-      //   }
-      //  )
-      //  .catch((error) => {
-      //      console.log(error);
-      //  })
-    );
+    //     this.setState({ items: newitems });
+    //     //  console.log(res.data)
+    //   }
+       .then((res) => {
+          // console.log(res.data.length);
+          this.setState({ items: res.data });
+        }
+       )
+       .catch((error) => {
+           console.log(error);
+       })
+    // );
   }
+  
   deleteUser(id) {
-    axios.delete('/register' + id).then((res) => console.log(res.data));
+    axios.delete('http://127.0.0.1/register' + id).then((res) => console.log(res.data));
     this.setState({
       users: this.state.users.filter((el) => el._id !== id),
     });
   }
 
   deletePost(id) {
-    axios.delete('/addItems/' + id).then((res) => console.log(res.data));
+    axios.delete('http://127.0.0.1/addItems/' + id).then((res) => console.log(res.data));
     this.setState({
       items: this.state.items.filter((el) => el._id !== id),
     });
@@ -123,7 +131,7 @@ class Personalprofile extends React.Component {
       this.state.Data.length > 0 ? this.state.data : this.state.users;
 
     return listedusers
-      .filter((elet) => localStorage.getItem('labName') === elet.labName)
+      .filter((elet) => localStorage.getItem('email') === elet.email)
       .map((currentLabName) => {
         return (
           <Profileuser
@@ -148,6 +156,7 @@ class Personalprofile extends React.Component {
       );
     });
   }
+
 
   render() {
     return (
@@ -175,3 +184,26 @@ class Personalprofile extends React.Component {
 }
 
 export default withRouter(Personalprofile);
+
+
+// const Personalprofile = () => {
+//   const [items, setitems] = useState([ ])
+
+//   useEffect(() => {
+//       axios.get('/addItems')
+//       .then(response => setFruits(response.data))
+//   }, [])
+
+//   return (
+//       <div>
+//           <h1>Edit your post</h1>
+//           <ul style={{listStyleType:"none"}}>
+//               {items.map(item => {
+//                   return (<li key={itme._id}><Link to={`/item/${item._id}`}>{item.testType}</Link> ({item.price}) - {item.price}</li>)
+//               })}
+//           </ul>
+//       </div>
+//   )
+// }
+
+// export default Personalprofile

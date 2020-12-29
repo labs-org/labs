@@ -1,7 +1,6 @@
 import React from 'react';
 import  { useState, useEffect } from "react";
-// import  { Component } from 'react';
-import Login from "./components/auth/Login";
+import Header from './components/layout/Header';
 import AppNavbar from "./components/AppNavbar";
 import AllLabs from "./components/AllLabs";
 import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
@@ -14,10 +13,11 @@ import {Layout} from "./components/Layout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Jumbotron } from './components/Jumbotron';
 import  Personalprofile from './components/Personalprofile';
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 import Edituser from './components/edituser';
 import EditPost from './components/edit';
 import UserContext from "./context/userContext";
-import Register from "./components/auth/Register";
 import Axios from "axios";
 import Search from './components/search';
 
@@ -30,9 +30,9 @@ export default function App() {
 
   useEffect(() => {
     const checkLoggedIn = async () => {
-      let token = localStorage.getItem("auth-token");
+      let token = localStorage.getItem("x-auth-token");
       if (token === null) {
-        localStorage.setItem("auth-token", "");
+        localStorage.setItem("x-auth-token", "");
         token = "";
       }
       const tokenRes = await Axios.post(
@@ -41,11 +41,11 @@ export default function App() {
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:3000/users/", {
+        const userRes = await Axios.get("http://localhost:3000/users/Personalprofile", {
           headers: { "x-auth-token": token },
         });
         setUserData({
-          token,
+          token: token,
           user: userRes.data,
         });
       }

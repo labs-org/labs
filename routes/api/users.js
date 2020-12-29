@@ -12,13 +12,13 @@ router.post("/register", async (req, res) => {
       passwordCheck,
       labName,
       location,
-      phone,
-      officialWebSite
+      phone
+      
     } = req.body;
 
     // validate
 
-    if (!email || !password || !passwordCheck || !labName || !location || !phone || !officialWebSite)
+    if (!email || !password || !passwordCheck || !labName || !location || !phone )
       return res.status(400).json({
         msg: "Not all fields have been entered."
       });
@@ -55,8 +55,7 @@ router.post("/register", async (req, res) => {
       password: passwordHash,
       labName,
       location,
-      phone,
-      officialWebSite
+      phone
     });
     const savedUser = await newUser.save();
     console.log(savedUser);
@@ -67,6 +66,8 @@ router.post("/register", async (req, res) => {
     });
   }
 });
+
+
 // log in
 router.post("/login", async (req, res) => {
   try {
@@ -100,10 +101,10 @@ router.post("/login", async (req, res) => {
       id: user._id
     }, process.env.JWT_SECRET);
     res.json({
-      token,
+      token: token,
       user: {
         id: user._id,
-        labName: user.labName,
+        email: user.email,
       },
     });
   } catch (err) {
@@ -112,8 +113,20 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+router.get("/login", (req, res) => {
+  res.send("GET Login");
+});
 
-router.delete("/delete", auth, async (req, res) => {
+// router.get('/Personalprofile', auth, async (req, res) => {
+//   const user= await User.findById(req.user._id)
+//   res.json({
+//     // id: user._id,
+//     email: user.email
+//   })
+// })
+
+
+router.delete("/Personalprofile", auth, async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.user);
     res.json(deletedUser);
@@ -122,6 +135,12 @@ router.delete("/delete", auth, async (req, res) => {
       error: err.message
     });
   }
+});
+
+router.delete("/:id", (req, res) => {
+  User.findByIdAndDelete(req.params.id)
+    .then(() => res.json("User deleted"))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.post("/tokenIsValid", async (req, res) => {
@@ -138,19 +157,36 @@ router.post("/tokenIsValid", async (req, res) => {
     return res.json(true);
   } catch (err) {
     res.status(500).json({
-      error: err.message
+      msg: err.message
     });
   }
 });
 
-router.get("/register", auth, async (req, res) => {
-  // const token = req.header("x-auth-token");
-  const user = await User.findById(req.user);
-  res.json({
-  //  token,
-    labName: user.labName,
-    id: user._id,
-  });
+// router.get("/register", auth, async (req, res) => {
+//   // const token = req.header("x-auth-token");
+//   const user = await User.findById(req.user);
+//   res.json({
+//   //  token,
+//     email: user.email,
+//     id: user._id,
+//   });
+// });
+router.get("/register", (req, res) => {
+  User.find()
+    .then((users) => res.json(users))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
+
+// router.get("/Personalprofile", auth, async (req, res) => {
+//   const user = await User.findById(req.user._id);
+//   console.log(user)
+//   res.json({
+//     id: user._id,
+//     email: user.email,
+//     labName: user.labName,
+//     location:user.location,
+//     phone:user.phone,
+//   });
+// });
 
 module.exports = router;

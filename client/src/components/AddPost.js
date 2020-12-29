@@ -78,7 +78,7 @@ onChangeTestType(e) {
   onSubmit(e) {  
     e.preventDefault();
     const item = {
-      labName:localStorage.getItem('labName'),
+      labName:localStorage.getItem('email'),
       testType: this.state.testType,
       price: this.state.price,
       image: this.state.url,
@@ -88,19 +88,16 @@ onChangeTestType(e) {
 
       $.ajax ({
         method: "POST",
-        url: "addItems/add",
+        url: "http://localhost:3000/addItems/",
         data: JSON.stringify(item),
         contentType : "application/json",
         success : function () {
           console.log('data posted successfully')
           window.location = '/AllLabs'
         },
-          
           error : function (err) {
             console.log(err)
-          }
-
-      
+          }      
       })
   }
 

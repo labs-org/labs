@@ -22,9 +22,9 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const newUser = { email, password, passwordCheck, labName,location, phone,officialWebSite };
-      await Axios.post("/users/register", newUser);
-      const loginRes = await Axios.post("/users/login", {
+      const newUser = { email, password, passwordCheck, labName,location, phone};
+      await Axios.post("http://localhost:3000/users/register", newUser);
+      const loginRes = await Axios.post("http://localhost:3000/users/login", {
         email,
         password,
       });
@@ -97,13 +97,13 @@ export default function Register() {
           onChange={(e) => setPhone(e.target.value)}
         />
 
-<label >Official officialWebSite</label>
+{/* <label >Official officialWebSite</label>
         <input
         required='true'  className="form-control col"
           id="official-web-site"
           type="text"
           onChange={(e) => setOfficialWebSite(e.target.value)}
-        />
+        /> */}
         
        {/* < Button class="btn btn-secondary" type='submit' value='Creat Account' className="btn btn-deep-orange darken-4"></Button> */}
         <input type="submit" value="Register" />

@@ -17,14 +17,14 @@ export default function Login() {
     try {
       const loginUser = { email, password };
       const loginRes = await Axios.post(
-        "/users/login",
+        "http://localhost:3000/users/login",
         loginUser
       );
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,
       });
-      localStorage.setItem("auth-token", loginRes.data.token);
+      localStorage.setItem("x-auth-token", loginRes.data.token);
       history.push("/Personalprofile");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
@@ -57,7 +57,7 @@ export default function Login() {
 
         <br></br>
                  <br></br>
-                <p>Don't have an account? <a href='/add'> Sign Up</a></p>
+                <p>Don't have an account? <a href='/register'> Sign Up</a></p>
       </form>
     </div>
   );
