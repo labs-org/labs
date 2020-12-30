@@ -20,6 +20,10 @@ const ItemSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    // addedBy:{
+    //     type: String,
+    //     default: "unknown"
+    // },
     date: {
         type: Date,
         default: Date.now

@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { storage } from "./firebase.js";
 
-
-
-
+// const authAxios = axios.create({
+//   headers: {
+//     Authorization: `Bearer ${token}`
+//   }
+// })
 export default class EditPost extends Component {
   constructor(props) {
     super(props);
@@ -63,7 +65,7 @@ handleUpload () {
        }
 
   componentDidMount() {
-    axios.get('http://127.0.0.1:3000/addItems/'+this.props.match.params.id)
+    axios.get('http://localhost:3000/addItems/'+this.props.match.params.id)
     
       .then(response => {
         this.setState({
@@ -76,19 +78,18 @@ handleUpload () {
         console.log(error);
       })
 
-      axios.put('http://127.0.0.1:3000/addItems/edit/' +this.props.match.params.id)
-      .then((item) => window.location = '/')
+      // axios.put('http://127.0.0.1:3000/addItems/edit/' +this.props.match.params.id )
+      // .then((item) => window.location = '/')
       
-      .catch(function (error) {
-        console.log(error)
-      })
-
-      
+      // .catch(function (error) {
+      //   console.log(error)
+      // })
+     
         // axios.delete('http://localhost:3000/addItems/' +this.props.match.params.id).then((res) => console.log(res.data))
         // // this.setState({
         // //   items: this.state.items.filter((el) => el._id !== id),
         // // });
-    
+    // console.log(localStorage.getItem("x-auth-token"))
     
     }
 
@@ -121,10 +122,16 @@ handleUpload () {
    
     }
 
-    console.log(item);
+    console.log(this.props.match.params);
+    // const auth = localStorage.getItem("x-auth-token");
 
-    axios.post("addItems/edit/"+this.props.match.params.id, item)
-      .then(res => console.log(res.data));
+    axios.patch("http://localhost:3000/addItems/edit/"+this.props.match.params.id,item
+    , {
+        headers: {
+          'x-auth-token': localStorage.getItem("x-auth-token") 
+        }
+      })
+    .then(res => console.log(res));
       console.log("updated")
 // go bact to all labs page after update the post
     window.location = '/AllLabs'
@@ -183,65 +190,3 @@ handleUpload () {
   }
 }
 
-
-// import React, { useState, useEffect } from 'react'
-// import axios from 'axios'
-// import { Button } from 'react-bootstrap'
-
-// const EditPost = ({match}) => {
-//     const [item, setItem] = useState({
-//         testType: "",
-//         price: "",
-//         image: ""
-//     })
-//     // const [testType, setTestType] = useState;
-//     // const [price, setPrice] = useState;
-//     // const [image, setImage] = useState;
-
-//     useEffect(() => {
-//         axios.get('/addItems/'+ match.params.id)
-//         .then(response => setItem(response.data))
-//     }, [])
-
-//     const postUpdate = () => {
-//         axios.put('/addItems/'+ match.params.id, item)
-//         .then((item) => console.log(fruit))
-//         window.location = '/Peronalprofile'
-//     }
-
-//     const postDelete = () => {
-//         axios.delete('/addItems/'+ match.params.id)
-//         .then((res) => console.log(res.status))
-//         window.location = '/Peronalprofile'
-//     }
-
-//     const handleChange = (e) => {
-//         const { name, value } = e.target
-//         setItem(oldItem => {
-//             return {
-//                 ...oldItem,
-//                 [testType]: value,
-//                 [price]: value,
-//                 [image]: value
-//             }
-//         })
-//     }
-
-//     return (
-//         <div>
-//             <h1>Editing {item.testType}</h1>
-//             <p><b>testType: {item.testType}</b></p>
-//             <label>Price: </label>
-//             <input type="text" name="name" value={item.price} required 
-//                 onChange={handleChange}/><br/>
-//             <label>Image: </label>
-//             <input type="text" name="amount" value={item.image}
-//                 onChange={handleChange}/><br/>
-           
-//             <Button className='btn btn-warning' onClick={postUpdate}>Update post</Button>
-//             <Button className='btn btn-danger' onClick={postDelete}>Delete post</Button>
-//         </div>
-//     )
-// }
-
-// export default EditPost;

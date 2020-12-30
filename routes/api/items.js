@@ -2,10 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require("../../middleware/auth");
 const bodyParser = require('body-parser');
-const verfiy = require('./verifyToken');
-const {
-  requireAuth
-} = require('./verifyToken')
+
 
 const Item = require('../../models/Item');
 
@@ -30,7 +27,8 @@ router.post("/", (req, res) => {
   const newItem = new Item({
     testType:req.body.testType,
     price:req.body.price,
-    image:req.body.image
+    image:req.body.image,
+    // addedBy: req.body.addedBy,
   });
 
   // saving the new item in the data base by .save method 
@@ -55,12 +53,28 @@ router.delete("/:id",auth, (req, res) => {
 
 
 
-//UPDATE item by ID
-router.put("edit/:id",auth,(req, res) => {
-  Item.findByIdAndUpdate(req.params.id, {$set:req.body})
+// UPDATE item by ID
+router.patch("/edit/:id",auth, (req, res) => {
+  console.log(req.header)
+  Item.findByIdAndUpdate(req.params.id,req.body)
     .then(() => res.json("post updated"))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => {console.log(err)
+      res.status(400).json('Error: ' + err)});
 })
+
+// router.route("/edit/:id", ).post((req, res) => {
+//   Item.findById(req.params.id)
+//   .then(items => {
+//     items.testType = req.body.testType;
+//     items.price = req.body.price;
+//     items.image = req.body.image;
+
+//     items.save()
+//     .then(() => res.json("Item is updated!"))
+//     .catch(err => res.status(400).json('Error: ' + err));
+//   })
+//     .catch(err => res.status(400).json('Error: ' + err));
+// })
 
 
 module.exports = router;

@@ -30,6 +30,9 @@ const UserSchema = new mongoose.Schema({
         min:10,
         trim: true,
     },
+    // id: {
+    //     unique:true,
+    // },
     // avatar: {
     //     type: String,
     //     required: false

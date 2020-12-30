@@ -45,7 +45,7 @@ router.post("/register", async (req, res) => {
           msg: "An account with this email already exists."
         });
 
-    if (!labName) labName = email;
+    // if (!labName) labName = email;
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
@@ -66,7 +66,6 @@ router.post("/register", async (req, res) => {
     });
   }
 });
-
 
 // log in
 router.post("/login", async (req, res) => {
@@ -120,11 +119,15 @@ router.get("/login", (req, res) => {
 // router.get('/Personalprofile', auth, async (req, res) => {
 //   const user= await User.findById(req.user._id)
 //   res.json({
-//     // id: user._id,
+//     id: user._id,
 //     email: user.email
 //   })
 // })
-
+router.route("/Personalprofile").get((req, res) => {
+  User.find()
+    .then((users) => res.json(users))
+    .catch((err) => res.status(400).json("Error :" + err));
+});
 
 router.delete("/Personalprofile", auth, async (req, res) => {
   try {
@@ -162,31 +165,19 @@ router.post("/tokenIsValid", async (req, res) => {
   }
 });
 
-// router.get("/register", auth, async (req, res) => {
-//   // const token = req.header("x-auth-token");
-//   const user = await User.findById(req.user);
-//   res.json({
-//   //  token,
-//     email: user.email,
-//     id: user._id,
-//   });
-// });
+
 router.get("/register", (req, res) => {
   User.find()
     .then((users) => res.json(users))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-// router.get("/Personalprofile", auth, async (req, res) => {
-//   const user = await User.findById(req.user._id);
-//   console.log(user)
-//   res.json({
-//     id: user._id,
-//     email: user.email,
-//     labName: user.labName,
-//     location:user.location,
-//     phone:user.phone,
-//   });
-// });
+
 
 module.exports = router;
+
+
+
+
+
+

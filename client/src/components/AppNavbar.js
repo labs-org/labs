@@ -36,6 +36,11 @@ import {
                   All Labs
                 </NavbarBrand >
               </li>
+              <li className="navbar-item" onClick={logout}>
+                <Link to="/logout" className="nav-link">
+                  Log out
+                </Link>
+              </li>
                     <NavbarToggler onClick={this.toggle} />
                       <Collapse isOpen={this.state.isOpen} navbar />
                           <Nav className="ml-auto" navbar>
@@ -51,8 +56,11 @@ import {
          </div>
          )
      }
-
-
  }
+ function logout() {
+  window.localStorage.clear();
+  window.location = "/";
+}
+
 
  export default AppNavbar;

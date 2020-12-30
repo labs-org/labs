@@ -12,7 +12,7 @@ export default function Register() {
   const [labName, setLabName] = useState();
   const [location, setLocation] = useState();
   const [phone, setPhone] = useState();
-  const [officialWebSite, setOfficialWebSite] = useState();
+  // const [officialWebSite, setOfficialWebSite] = useState();
   const [error, setError] = useState();
 
   const { setUserData } = useContext(UserContext);
@@ -31,8 +31,9 @@ export default function Register() {
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,
+        // id:loginRes.data.id
       });
-      localStorage.setItem("auth-token", loginRes.data.token);
+      localStorage.setItem("x-auth-token", loginRes.data.token);
       history.push("/login");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
