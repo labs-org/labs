@@ -15,8 +15,10 @@ export default function AuthOptions() {
     setUserData({
       token: undefined,
       user: undefined,
+      labName: undefined
     });
     localStorage.setItem("x-auth-token", "");
+    localStorage.setItem("labName", "");
   };
 
   return (

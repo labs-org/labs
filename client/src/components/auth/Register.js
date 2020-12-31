@@ -23,18 +23,14 @@ export default function Register() {
 
     try {
       const newUser = { email, password, passwordCheck, labName,location, phone};
-      await Axios.post("http://localhost:3000/users/register", newUser);
-      const loginRes = await Axios.post("http://localhost:3000/users/login", {
-        email,
-        password,
-      });
-      setUserData({
-        token: loginRes.data.token,
-        user: loginRes.data.user,
-        // id:loginRes.data.id
-      });
-      localStorage.setItem("x-auth-token", loginRes.data.token);
-      history.push("/login");
+       Axios.post("http://localhost:3000/users/register", newUser)
+       .then(function (){
+        history.push("/login");
+
+       })
+
+      
+      // history.push("/login");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }
@@ -82,7 +78,7 @@ export default function Register() {
           onChange={(e) => setLabName(e.target.value)}
         />
 
-<label>Location</label>
+      <label>Location</label>
         <input
         required='true'  className="form-control col"
           id="register-location"

@@ -7,6 +7,7 @@ import ErrorNotice from "../misc/ErrorNotice";
 export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [labName, setLabName] = useState();
   const [error, setError] = useState();
 
   const { setUserData } = useContext(UserContext);
@@ -15,16 +16,17 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const loginUser = { email, password };
+      const loginUser = { email, password, labName };
       const loginRes = await Axios.post(
         "http://localhost:3000/users/login",
         loginUser
       );
       setUserData({
-        token: loginRes.data.token,
+        token: loginRes.data.token,  
         user: loginRes.data.user,
       });
       localStorage.setItem("x-auth-token", loginRes.data.token);
+      localStorage.setItem("labName", loginRes.data.labName);
       history.push("/Personalprofile");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
@@ -52,6 +54,14 @@ export default function Login() {
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <label>Lab Name</label>
+        <input
+        required='true' type='text'className="form-control col"
+          id="login-labName"
+          type="text"
+          onChange={(e) => setLabName(e.target.value)}
+        />
+
         <br></br>
         <input type="submit" value="Log in" />
 

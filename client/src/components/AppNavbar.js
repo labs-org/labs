@@ -37,17 +37,16 @@ import {
                 </NavbarBrand >
               </li>
               <li className="navbar-item" onClick={logout}>
-                <Link to="/logout" className="nav-link">
-                  Log out
-                </Link>
+              <NavbarBrand href="/">Log out</NavbarBrand>
+              <NavbarBrand href="/Personalprofile">Profile</NavbarBrand>
               </li>
                     <NavbarToggler onClick={this.toggle} />
                       <Collapse isOpen={this.state.isOpen} navbar />
                           <Nav className="ml-auto" navbar>
                             <NavItem>
-                    <Link to="/login" className="nav-link">
+                    <NavbarBrand href="/login" >
                   Login
-                </Link>
+                </NavbarBrand>
                 
                     </NavItem>
                     </Nav>

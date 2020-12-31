@@ -19,7 +19,7 @@ import Edituser from './components/edituser';
 import EditPost from './components/edit';
 import UserContext from "./context/userContext";
 import Axios from "axios";
-import Search from './components/search';
+
 
 
 export default function App() {
@@ -74,7 +74,7 @@ export default function App() {
               <Route path = "/personalprofile" component = {Personalprofile} />
               {/* <Route path = "/add"  component = { Signup } /> */}
               <Route path = "/register" component = {Register} />
-              <Route path = "/search" component = {Search} />
+           
               <Route component={NoMatch} />
             </Switch>
           </Layout>

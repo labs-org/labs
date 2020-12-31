@@ -1,33 +1,31 @@
 const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
-    // user: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'user'
-    //   },
 
     testType: {
         type: String,
-        // required: true,
+        required: false,
     },
     price: {
         type: String,
-        // required: true,
+        required: false,
     },
-    image:
-    {
+    image: {
         type: String,
-        required: true,
+        // required: true,
         trim: true
     },
-    // addedBy:{
-    //     type: String,
-    //     default: "unknown"
-    // },
+
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    labName: {
+        type: String,
+        minlength: 3,
+        // required: true,
+        unique: true
+    },
 
 })
 

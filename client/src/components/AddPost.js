@@ -12,11 +12,13 @@ class AddPost extends Component {
     this.onChangeTestType = this.onChangeTestType.bind(this);
     this.onChangePrice= this.onChangePrice.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
+    this.onChangeLabName= this.onChangeLabName.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
   this.state= {    
       testType : '',
       price: '' ,
+      labName: '',
       image:null,
       url :'',
       progress:0,
@@ -32,6 +34,12 @@ onChangeTestType(e) {
         price: e.target.value
     });
   }
+  onChangeLabName(e) {
+    this.setState({
+        labName: e.target.value
+    });
+  }
+
 
     // it addes the values of the input fileds in the states so we add the image from fire base 
     handleChangeImage(e) {
@@ -78,9 +86,9 @@ onChangeTestType(e) {
   onSubmit(e) {  
     e.preventDefault();
     const item = {
-      labName:localStorage.getItem('email'),
       testType: this.state.testType,
       price: this.state.price,
+      labName: this.state.labName,
       image: this.state.url,
          }
 
@@ -89,7 +97,7 @@ onChangeTestType(e) {
       $.ajax ({
         method: "POST",
         url: "http://localhost:3000/addItems/",
-        data: JSON.stringify(item),
+        data: JSON.stringify({item}),
         contentType : "application/json",
         success : function () {
           console.log('data posted successfully')

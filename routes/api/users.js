@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
         });
 
     const existingUser = await User.findOne({
-      email: email
+      labName: labName
     });
     if (existingUser)
       return res
@@ -72,7 +72,8 @@ router.post("/login", async (req, res) => {
   try {
     const {
       email,
-      password
+      password,
+      labName
     } = req.body;
 
     // validate
@@ -82,13 +83,14 @@ router.post("/login", async (req, res) => {
       });
 
     const user = await User.findOne({
-      email: email
+      labName: req.body.labName
     });
+    console.log('here is the user ', user)
     if (!user)
       return res
         .status(400)
         .json({
-          msg: "No account with this email has been registered."
+          msg: "No account with this LAB name has been registered."
         });
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -101,9 +103,10 @@ router.post("/login", async (req, res) => {
     }, process.env.JWT_SECRET);
     res.json({
       token: token,
+      labName: user.labName,
       user: {
         id: user._id,
-        email: user.email,
+       
       },
     });
   } catch (err) {
@@ -116,13 +119,7 @@ router.get("/login", (req, res) => {
   res.send("GET Login");
 });
 
-// router.get('/Personalprofile', auth, async (req, res) => {
-//   const user= await User.findById(req.user._id)
-//   res.json({
-//     id: user._id,
-//     email: user.email
-//   })
-// })
+
 router.route("/Personalprofile").get((req, res) => {
   User.find()
     .then((users) => res.json(users))

@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 const auth = (req, res, next) => {
  
     const token = req.header("x-auth-token");
-    if (!token)
+    const labName= req.header("labName");
+    if (!token && labName)
       return res
         .status(401)
         .json({ msg: "No authentication token, authorization denied." });

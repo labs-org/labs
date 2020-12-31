@@ -23,12 +23,12 @@ router.get("/", async (req, res) => {
 
 //route create the item
 router.post("/", (req, res) => {
-  
   const newItem = new Item({
     testType:req.body.testType,
     price:req.body.price,
     image:req.body.image,
-    // addedBy: req.body.addedBy,
+    labName:req.body.labName,
+    
   });
 
   // saving the new item in the data base by .save method 
@@ -55,7 +55,7 @@ router.delete("/:id",auth, (req, res) => {
 
 // UPDATE item by ID
 router.patch("/edit/:id",auth, (req, res) => {
-  console.log(req.header)
+  // console.log(req.header)
   Item.findByIdAndUpdate(req.params.id,req.body)
     .then(() => res.json("post updated"))
     .catch(err => {console.log(err)
