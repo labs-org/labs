@@ -13,13 +13,20 @@ app.use(bodyParser.urlencoded({
 }));
 
 //route get the item
-router.get("/fetch", async (req, res) => {
+router.get("/", async (req, res) => {
   Item.find()
   .then(items => res.json(items))
     // .then((ItemSchema) => res.json(ItemSchema))
     .catch((err) => res.status(400).json("error here" + err));
 
 });
+// router.get("/allpost", async (req, res) => {
+//   Item.find()
+//   .then(items => res.json(items))
+//     // .then((ItemSchema) => res.json(ItemSchema))
+//     .catch((err) => res.status(400).json("error here" + err));
+
+// });
 
 //route create the item
 router.post("/", (req, res) => {

@@ -20,6 +20,7 @@ import EditPost from './components/edit';
 import UserContext from "./context/userContext";
 import Axios from "axios";
 import Allpost from './components/Allpost';
+import EmailUs from "./components/Email";
 
 
 
@@ -71,6 +72,7 @@ export default function App() {
               <Route path="/AllLabs" component={AllLabs} />
               <Route path = "/login" component = { Login } />
               <Route path = "/fetch" component = {Allpost} />
+              <Route path="/EmailUs" component = {EmailUs}/>
               <Route path = "/edit/:id" component = { EditPost }/>
               <Route path = "/editpost/:id" component = { Editpost}/>
               <Route path = "/personalprofile" component = {Personalprofile} />

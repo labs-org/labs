@@ -162,7 +162,7 @@ handleUpload () {
     .then(res => console.log(res));
       console.log("updated")
 // go bact to all labs page after update the post
-    window.location = '/AllLabs'
+    window.location = '/Personalprofile'
   }
 
   render() {

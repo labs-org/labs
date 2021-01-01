@@ -5,14 +5,14 @@ import { Link, withRouter } from 'react-router-dom';
 
 
 
-const Profileuser= props => (
+const Profileuser= (props) => (
   <tr>
     
-      <td>{props.item.testType}</td>
-      <td>{props.item.price}</td>
+      <td>{props.post.testType}</td>
+      <td>{props.post.price}</td>
       <td>
       <img
-        src={props.item.image}
+        src={props.post.image}
         width="200"
         height="200"
         class="w3-round"
@@ -20,10 +20,10 @@ const Profileuser= props => (
       />
     </td>
        <td> 
-      <Link to ={'/edit/' + props.item._id} className="btn btn-deep-orange darken-4" >Edit item</Link>
+      <Link to ={'/edit/' + props.post._id} className="btn btn-deep-orange darken-4" >Edit item</Link>
       <button type = "button" 
       className="btn btn-deep-orange darken-4"
-      onClick = {() => { props.deletePost(props.item._id)}}> Delete Item
+      onClick = {() => { props.deletePost(props.post._id)}}> Delete Item
       </button>
       </td> 
   </tr>
@@ -39,7 +39,7 @@ class AllPost extends React.Component {
       users: [],
       Data: [],
       labName: [],
-      items: []
+      posts: []
      
     };
   }
@@ -47,7 +47,7 @@ class AllPost extends React.Component {
   componentDidMount() {
     
     // axios
-    //   .get('http://localhost:3000/users/register')
+    //   .get('http://localhost:3000/addItems/fetch')
     //   .then((res) => {
     //     this.setState({ users: res.data });
     //   })
@@ -55,22 +55,22 @@ class AllPost extends React.Component {
     //     console.log(error);
     //   });
 
-    axios.get('http://localhost:3000/addItems/fetch',  {
+    axios.get('http://localhost:3000/addItems',  {
       headers: {
         'x-auth-token': localStorage.getItem("x-auth-token") ,
         'labName': localStorage.getItem("labName") 
       }
     })
        .then((res) => {
-        var newitems=[]
+        var newposts=[]
         for(var i =0 ; i< res.data.length;i++){
           if(res.data[i].labName === localStorage.getItem('labName')){
-             newitems.push(res.data[i])
+             newposts.push(res.data[i])
              console.log(res.data)
           }
         }
           // console.log(res.data.length);
-          this.setState({ items: newitems });
+          this.setState({ posts: newposts });
         }
        )
        .catch((error) => {
@@ -91,7 +91,7 @@ class AllPost extends React.Component {
     }
     ).then((res) => console.log(res.data));
     this.setState({
-      items: this.state.items.filter((el) => el._id !== id),
+      posts: this.state.posts.filter((el) => el._id !== id),
     });
   }
 
@@ -113,10 +113,10 @@ class AllPost extends React.Component {
 //   }
 
   usersList() {
-    let listedusers = (this.state.Data.length >0)? this.state.data :this.state.items;
+    let listedusers = (this.state.Data.length >0)? this.state.data :this.state.posts;
   
-    return listedusers.filter(elet=> localStorage.getItem('labName') === elet.labName).map(currentItem => {
-      return <Profileuser Item= { currentItem } deleteItem = { this.deleteItem} key = { currentItem._id }/>; 
+    return listedusers.filter(elet=> localStorage.getItem('labName') === elet.labName).map(currentpost => {
+      return <Profileuser post= { currentpost } deletePost = { this.deletePost} key = { currentpost._id }/>; 
     })
   }
 

@@ -3,6 +3,7 @@ import axios from "axios";
 
 
 
+
 const Post = (props) => (
 
   <tr>
@@ -11,8 +12,8 @@ const Post = (props) => (
     <td>{props.item.phone}</td>
     <td>{props.item.testType}</td>
     <td>{props.item.price}</td>
-    
-
+     <a href="/EmailUs"> Email Us</a>
+ 
     <td>
       <img
         src={props.item.image}
@@ -52,7 +53,8 @@ class AllLabs extends Component {
   let listedItems = (this.state.filteredItems.length > 0)? this.state.filteredItems : this.state.items;  
     return listedItems.map(currentItem => {     
              return <Post item={currentItem} 
-             key={currentItem._id} />    })  }
+             key={currentItem._id} />    }) 
+           }
 
   onSearch = e => {
      let { items } = this.state
@@ -83,6 +85,7 @@ class AllLabs extends Component {
           <table className="table">
           {/* <tbody>{this.inputsList()}</tbody> */}
             <tbody>{this.lab()}</tbody>
+           
           </table>
         </div>
       </div>
