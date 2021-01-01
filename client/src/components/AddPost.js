@@ -9,16 +9,21 @@ class AddPost extends Component {
       super(props);
 
     //Defining the "this" in the functions using .bind method
+ 
+    this.onChangeLabName= this.onChangeLabName.bind(this);
+    this.onChangeLocation= this.onChangeLocation.bind(this);
+    this.onChangePhone= this.onChangePhone.bind(this);
     this.onChangeTestType = this.onChangeTestType.bind(this);
     this.onChangePrice= this.onChangePrice.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
-    this.onChangeLabName= this.onChangeLabName.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
   this.state= {    
+      labName: '',
+      location:'',
+      phone: '',
       testType : '',
       price: '' ,
-      labName: '',
       image:null,
       url :'',
       progress:0,
@@ -37,6 +42,16 @@ onChangeTestType(e) {
   onChangeLabName(e) {
     this.setState({
         labName: e.target.value
+    });
+  }
+  onChangeLocation(e) {
+    this.setState({
+        location: e.target.value
+    });
+  }
+  onChangePhone(e) {
+    this.setState({
+        phone: e.target.value
     });
   }
 
@@ -86,9 +101,11 @@ onChangeTestType(e) {
   onSubmit(e) {  
     e.preventDefault();
     const item = {
+      labName: this.state.labName,
+      location: this.state.location,
+      phone: this.state.phone,
       testType: this.state.testType,
       price: this.state.price,
-      labName: this.state.labName,
       image: this.state.url,
          }
 
@@ -97,11 +114,12 @@ onChangeTestType(e) {
       $.ajax ({
         method: "POST",
         url: "http://localhost:3000/addItems/",
-        data: JSON.stringify({item}),
+        data: JSON.stringify(item),
         contentType : "application/json",
         success : function () {
           console.log('data posted successfully')
           window.location = '/AllLabs'
+
         },
           error : function (err) {
             console.log(err)
@@ -119,6 +137,40 @@ onChangeTestType(e) {
           <form className="text-center border border-light p-9" action="#!"  >
 
             <p className="h4 mb-4">Please enter you post</p>
+
+                <div className="col">
+                <label>LAB NAME</label>
+                <input 
+                required="true"
+                  type = "text" 
+                  className = "form-control" 
+                  value = {this.state.labName} 
+                  onChange = {this.onChangeLabName}
+                  text-align = "center"
+                  placeholder = "Enter your posts"/>
+                </div>
+                <div className="col">
+                <label>Location</label>
+                <input 
+                required="true"
+                  type = "text" 
+                  className = "form-control" 
+                  value = {this.state.location} 
+                  onChange = {this.onChangeLocation}
+                  text-align = "center"
+                  placeholder = "Enter your location"/>
+                </div>
+                <div className="col">
+                <label>Phone No</label>
+                <input 
+                required="true"
+                  type = "text" 
+                  className = "form-control" 
+                  value = {this.state.phone} 
+                  onChange = {this.onChangePhone}
+                  text-align = "center"
+                  placeholder = "Enter your Phone no"/>
+                </div>
 
                 <div className="col">
                 <label>test type</label>

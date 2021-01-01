@@ -12,7 +12,9 @@ router.post("/register", async (req, res) => {
       passwordCheck,
       labName,
       location,
-      phone
+      phone,
+      testType,
+      price
       
     } = req.body;
 
@@ -55,7 +57,9 @@ router.post("/register", async (req, res) => {
       password: passwordHash,
       labName,
       location,
-      phone
+      phone,
+      testType,
+      price
     });
     const savedUser = await newUser.save();
     console.log(savedUser);
@@ -168,8 +172,31 @@ router.get("/register", (req, res) => {
     .then((users) => res.json(users))
     .catch((err) => res.status(400).json("Error: " + err));
 });
+/// post to add posts
+router.post("/", (req, res) => {
+  const newItem = new User({
+    labName:req.body.labName,
+    location:req.body.location,
+    phone:req.body.phone,
+    testType:req.body.testType,
+    price:req.body.price,
+    image:req.body.image,    
+  });
 
+  // saving the new item in the data base by .save method 
+  newItem.save()
+    .then((items) => res.json("POST Added!"))
+    .catch(err => res.status(400).json("Error: " + err));
+});
 
+// UPDATE item by ID
+router.patch("/edit/:id",auth, (req, res) => {
+  // console.log(req.header)
+  User.findByIdAndUpdate(req.params.id,req.body)
+    .then(() => res.json("post updated"))
+    .catch(err => {console.log(err)
+      res.status(400).json('Error: ' + err)});
+})
 
 module.exports = router;
 

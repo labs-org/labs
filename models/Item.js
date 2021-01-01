@@ -1,6 +1,23 @@
 const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
+    labName: {
+        type: String,
+        minlength: 3,
+        required: false,
+        unique: true
+    },
+    location: {
+        type: String,
+        minlength: 3,
+        // required: true,
+        unique: true
+    },  phone: {
+        type: Number,
+        minlength: 3,
+        required: false,
+    },
+
 
     testType: {
         type: String,
@@ -12,7 +29,7 @@ const ItemSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        // required: true,
+        required: false,
         trim: true
     },
 
@@ -20,13 +37,7 @@ const ItemSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    labName: {
-        type: String,
-        minlength: 3,
-        // required: true,
-        unique: true
-    },
-
+   
 })
 
 module.exports = Item = mongoose.model('item', ItemSchema);

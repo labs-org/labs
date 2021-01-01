@@ -42,6 +42,20 @@ const UserSchema = new mongoose.Schema({
     //     required: true,
     //     unique: true
     // },
+    testType: {
+        type: String,
+        required: false,
+    },
+    price: {
+        type: String,
+        required: false,
+    },
+    image: {
+        type: String,
+        required: false,
+        trim: true
+    },
+
     date : {
         type: Date,
         default: Date.now

@@ -15,8 +15,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(express.static(path.join(__dirname, 'public')))
-app.get('*', (req,res) => res.sendFile(path.join(__dirname, '/')))
+// app.use(express.static(path.join(__dirname, 'public')))
+// app.get('*', (req,res) => res.sendFile(path.join(__dirname, '/')))
 const db = require('./config/keys').mongoURI;
 
 mongoose

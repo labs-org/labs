@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { post } from 'jquery';
-// import Search from "./search";
-// import { Router} from "react-router-dom";
+
 
 
 const Post = (props) => (
 
   <tr>
+    <td>{props.item.labName}</td>
+    <td>{props.item.location}</td>
+    <td>{props.item.phone}</td>
     <td>{props.item.testType}</td>
     <td>{props.item.price}</td>
+    
+
     <td>
       <img
         src={props.item.image}
@@ -38,7 +41,7 @@ class AllLabs extends Component {
    
   }
   componentDidMount() {  
-     axios.get('http://127.0.0.1:3000/addItems/') 
+     axios.get('http://localhost:3000/addItems') 
        .then(response => { this.setState({ items: response.data })})     
         .catch((error) => {    
               console.log(error);  
@@ -55,7 +58,8 @@ class AllLabs extends Component {
      let { items } = this.state
      let string = e.target.value
      if(string.length > 0){
-       let filteredItems = items.filter(item => item.testType.includes(string))
+       let filteredItems = items.filter(item => item.location.includes(string))
+       console.log(items)
         this.setState({SearchString:string,filteredItems:filteredItems})
             }
            else this.setState({SearchString:string,filteredItems:[]})
@@ -73,7 +77,7 @@ class AllLabs extends Component {
             className="form-control"
             onChange={(e) => this.onSearch(e)}
             value={this.state.SearchString}
-            placeholder="Search for test type"
+            placeholder="Search for location"
           />
           
           <table className="table">

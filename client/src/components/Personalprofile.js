@@ -2,6 +2,8 @@
 import React from 'react';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
+import Allpost from './Allpost';
+
 
 
 const Profileuser = (props) => (
@@ -10,6 +12,11 @@ const Profileuser = (props) => (
     <td>{props.user.labName}</td>
     <td>{props.user.location}</td>
     <td>{props.user.phone}</td>
+    <td>{props.user.testType}</td>
+    <td>{props.user.price}</td>
+
+
+
     {/* <td>
       <img
         src={props.item.image}
@@ -41,7 +48,7 @@ const Profileuser = (props) => (
 
       <td>
       <Link
-        to={'/edit/user' + props.user._id}
+        to={'/edit/' + props.user._id}
         className="btn btn-deep-orange darken-4"
       >
         Edit
@@ -111,8 +118,12 @@ class Personalprofile extends React.Component {
         console.log(error);
       });
 
-    axios.get('http://localhost:3000/addItems')
-   
+    axios.get('http://localhost:3000/addItems/',  {
+      headers: {
+        'x-auth-token': localStorage.getItem("x-auth-token") ,
+        'labName': localStorage.getItem("labName") 
+      }
+    })
        .then((res) => {
         var newitems=[]
         for(var i =0 ; i< res.data.length;i++){
@@ -122,7 +133,7 @@ class Personalprofile extends React.Component {
           }
         }
           // console.log(res.data.length);
-          // this.setState({ items: res.data });
+          this.setState({ items: newitems});
         }
        )
        .catch((error) => {
@@ -204,6 +215,7 @@ class Personalprofile extends React.Component {
             
            <tbody>{this.usersList()}</tbody>
             <tbody>{this.itemsList()}</tbody>
+            <Allpost />
           </table>
         </div>
         <br />

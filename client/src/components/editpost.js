@@ -68,7 +68,7 @@ handleUpload () {
        }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/users/'+this.props.match.params.id)
+    axios.get('http://localhost:3000/addItems/'+this.props.match.params.id)
     
       .then(response => {
         this.setState({
@@ -152,7 +152,7 @@ handleUpload () {
     console.log(this.props.match.params);
     // const auth = localStorage.getItem("x-auth-token");
 
-    axios.patch("http://localhost:3000/users/edit/"+this.props.match.params.id,user
+    axios.patch("http://localhost:3000/addItems/edit/"+this.props.match.params.id,user
     , {
         headers: {
           'x-auth-token': localStorage.getItem("x-auth-token"),

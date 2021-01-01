@@ -1,65 +1,63 @@
 import React, { Component } from 'react';
+
 import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-   Container
-  } from 'reactstrap';
-  import { Link } from "react-router-dom";
-//   import { About } from './About';
-// import { Contact } from './Contact';
+  Navbar,
+  NavbarBrand,
+  Nav,
+  Container,
+} from 'reactstrap';
+// import { Link } from 'react-router-dom';
 
- class AppNavbar extends Component {
-     state = {
-             isOpen: false
-         }
-     toggle = () => {
-         //so either it's open he will toggle, and if it's close it will toggle to open
-         this.setState({
-             isOpen: !this.state.isOpen
-         });
-     }
-
-     render () {
-         return (
-         <div>
-             <Navbar color ="dark" dark expand="sm" className="mb-5">
-              <Container>
-                  <NavbarBrand href="/">Home</NavbarBrand>
-                  <NavbarBrand href="/About">About</NavbarBrand>
-              <NavbarBrand href="/Contact" >Contact Us </NavbarBrand>
-              <li className="navbar-item">
-                <NavbarBrand href="/AllLabs">
-                  All Labs
-                </NavbarBrand >
-              </li>
-              <li className="navbar-item" onClick={logout}>
-              <NavbarBrand href="/">Log out</NavbarBrand>
-              <NavbarBrand href="/Personalprofile">Profile</NavbarBrand>
-              </li>
-                    <NavbarToggler onClick={this.toggle} />
-                      <Collapse isOpen={this.state.isOpen} navbar />
-                          <Nav className="ml-auto" navbar>
-                            <NavItem>
-                    <NavbarBrand href="/login" >
-                  Login
-                </NavbarBrand>
-                
-                    </NavItem>
-                    </Nav>
-               </Container>
-             </Navbar>
-         </div>
-         )
-     }
- }
- function logout() {
-  window.localStorage.clear();
-  window.location = "/";
+var value = false;
+if (window.localStorage.labName) {
+  value = true;
+} else {
+  value = false;
 }
 
 
- export default AppNavbar;
+
+
+class AppNavbar extends Component {
+
+  render() {
+    return (
+      <div>
+        {value === true ? (
+          <Navbar color="dark" dark expand="sm" className="mb-5">
+            <Container>
+              <NavbarBrand href="/">Home</NavbarBrand>
+              <li className="navbar-item" onClick={logout}>
+                <NavbarBrand href="/">Log out</NavbarBrand>
+                <NavbarBrand href="/Personalprofile">Profile</NavbarBrand>
+                {/* <NavbarBrand href="/fetch">All Posts</NavbarBrand> */}
+              </li>
+            
+              <Nav className="ml-auto" navbar></Nav>
+            </Container>
+          </Navbar>
+        
+        ) : (
+           <Navbar color="dark" dark expand="sm" className="mb-5">
+            <Container>
+              <NavbarBrand href="/">Home</NavbarBrand>
+              <NavbarBrand href="/About">About</NavbarBrand>
+              <NavbarBrand href="/Contact" >Contact Us </NavbarBrand>
+            
+                <NavbarBrand href="/AllLabs"> All Labs </NavbarBrand >
+              
+                <NavbarBrand href="/login" > Login</NavbarBrand>
+              <Nav className="ml-auto" navbar></Nav>
+            </Container>
+          </Navbar>
+        )}
+      </div>
+    );
+  }
+}
+function logout() {
+  window.localStorage.clear();
+  window.location = '/';
+}
+
+export default AppNavbar;

@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 //route get the item
-router.get("/", async (req, res) => {
+router.get("/fetch", async (req, res) => {
   Item.find()
   .then(items => res.json(items))
     // .then((ItemSchema) => res.json(ItemSchema))
@@ -24,10 +24,12 @@ router.get("/", async (req, res) => {
 //route create the item
 router.post("/", (req, res) => {
   const newItem = new Item({
+    labName:req.body.labName,
+    location:req.body.location,
+    phone:req.body.phone,
     testType:req.body.testType,
     price:req.body.price,
     image:req.body.image,
-    labName:req.body.labName,
     
   });
 
@@ -62,19 +64,7 @@ router.patch("/edit/:id",auth, (req, res) => {
       res.status(400).json('Error: ' + err)});
 })
 
-// router.route("/edit/:id", ).post((req, res) => {
-//   Item.findById(req.params.id)
-//   .then(items => {
-//     items.testType = req.body.testType;
-//     items.price = req.body.price;
-//     items.image = req.body.image;
 
-//     items.save()
-//     .then(() => res.json("Item is updated!"))
-//     .catch(err => res.status(400).json('Error: ' + err));
-//   })
-//     .catch(err => res.status(400).json('Error: ' + err));
-// })
 
 
 module.exports = router;
