@@ -83,7 +83,21 @@ class AllLabs extends Component {
           />
           
           <table className="table">
-          {/* <tbody>{this.inputsList()}</tbody> */}
+          
+                <thead className = "thead">
+                    <tr>
+                        <th>Lab Name</th>
+                        <th>Location</th>
+                        <th>Phone</th>
+                        <th>Test Type</th>
+                        <th>Price</th>
+                        <th>send email</th>
+                        <th>Image</th>
+                        
+                    </tr>
+                </thead>
+                
+
             <tbody>{this.lab()}</tbody>
            
           </table>

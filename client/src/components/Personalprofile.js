@@ -2,8 +2,6 @@
 import React from 'react';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
-// import Allpost from './Allpost';
-
 
 
 const Profileuser = (props) => (
@@ -14,8 +12,6 @@ const Profileuser = (props) => (
     <td>{props.user.phone}</td>
     {/* <td>{props.user.testType}</td>
     <td>{props.user.price}</td> */}
-
-
 
       <td>
       <Link
@@ -186,7 +182,7 @@ class Personalprofile extends React.Component {
                 <thead className = "thead">
                     <tr>
                         <th>LAB Name</th>
-                        <th>LOCATION</th>
+                        <th>Location</th>
                         <th>Phone</th>
                     </tr>
                 </thead>

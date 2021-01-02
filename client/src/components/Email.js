@@ -10,6 +10,7 @@ export default function EmailUs() {
     'user_XxBT7kIwwSwWNCHpqY7Xm')
         .then((result) => {
             console.log(result.text);
+            window.location = "/"
         }, (error) => {
             console.log(error.text);
         });

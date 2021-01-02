@@ -41,7 +41,7 @@ export default function Login() {
       <form className="form" onSubmit={submit}>
         <label>Email</label>
         <input
-        required='true' type='text'className="form-control col"
+        required='true' className="form-control col"
           id="login-email"
           type="email"
           onChange={(e) => setEmail(e.target.value)}
@@ -49,14 +49,14 @@ export default function Login() {
 
         <label>Password</label>
         <input
-         required='true'  type="password" name="password" className="form-control col"
+         required='true' name="password" className="form-control col"
           id="login-password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <label>Lab Name</label>
         <input
-        required='true' type='text'className="form-control col"
+        required='true' className="form-control col"
           id="login-labName"
           type="text"
           onChange={(e) => setLabName(e.target.value)}

@@ -26,30 +26,10 @@ const UserSchema = new mongoose.Schema({
     },
     phone: {
         type: Number,
-         unique:true,
-        min:10,
-        trim: true,
+        minlength: 5,
+        required: true,
     },
-    // id: {
-    //     unique:true,
-    // },
-    // avatar: {
-    //     type: String,
-    //     required: false
-    // },
-    // officialWebsite: {
-    //     type: String,
-    //     required: true,
-    //     unique: true
-    // },
-    testType: {
-        type: String,
-        required: false,
-    },
-    price: {
-        type: String,
-        required: false,
-    },
+    
     image: {
         type: String,
         required: false,

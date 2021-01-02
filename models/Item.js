@@ -14,7 +14,7 @@ const ItemSchema = new mongoose.Schema({
         unique: true
     },  phone: {
         type: Number,
-        minlength: 3,
+        minlength: 5,
         required: false,
     },
 
