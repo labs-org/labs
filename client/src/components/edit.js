@@ -68,7 +68,14 @@ handleUpload () {
        }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/users/'+this.props.match.params.id)
+    axios.get('http://localhost:3000/addItems/'+this.props.match.params.id,
+    {
+      headers: {
+        'x-auth-token': localStorage.getItem("x-auth-token"),
+        'labName': localStorage.getItem("labName")
+      }
+    }
+    )
     
       .then(response => {
         this.setState({
@@ -84,19 +91,7 @@ handleUpload () {
       .catch(function (error) {
         console.log(error);
       })
-
-      // axios.put('http://127.0.0.1:3000/addItems/edit/' +this.props.match.params.id )
-      // .then((item) => window.location = '/')
-      
-      // .catch(function (error) {
-      //   console.log(error)
-      // })
      
-        // axios.delete('http://localhost:3000/addItems/' +this.props.match.params.id).then((res) => console.log(res.data))
-        // // this.setState({
-        // //   items: this.state.items.filter((el) => el._id !== id),
-        // // });
-    // console.log(localStorage.getItem("x-auth-token"))
     
     }
 
@@ -138,7 +133,7 @@ handleUpload () {
 
   onSubmit(e) {
     e.preventDefault();
-    const user = {
+    const item = {
      
       labName: this.state.labName,
       location: this.state.location,
@@ -150,9 +145,9 @@ handleUpload () {
     }
 
     console.log(this.props.match.params);
-    // const auth = localStorage.getItem("x-auth-token");
+   
 
-    axios.patch("http://localhost:3000/users/edit/"+this.props.match.params.id,user
+    axios.patch("http://localhost:3000/addItems/edit/"+this.props.match.params.id,item
     , {
         headers: {
           'x-auth-token': localStorage.getItem("x-auth-token"),
@@ -161,19 +156,17 @@ handleUpload () {
       })
     .then(res => console.log(res));
       console.log("updated")
-// go bact to all labs page after update the post
+// go bact to personal profile page after update the post
     window.location = '/Personalprofile'
+
+
   }
 
   render() {
     return (
         <div className = "container">
-
           <form className="text-center border border-light p-5" action="#!" onSubmit = {this.onSubmit}>
-
-            <p className="h4 mb-4">Edit Your Post</p>
-
-             
+            <p className="h4 mb-4">Edit Your Post</p>             
           <div className="col">
                 <label>Lab Name</label>
                 <input 
@@ -181,8 +174,7 @@ handleUpload () {
                   className = "form-control" 
                   value = {this.state.labName} 
                   onChange = {this.onChangelabName}
-                  text-align = "center"
-             
+                  text-align = "center"           
                   />
                 </div>
                 <br>

@@ -130,18 +130,23 @@ router.route("/Personalprofile").get((req, res) => {
     .catch((err) => res.status(400).json("Error :" + err));
 });
 
-router.delete("/Personalprofile", auth, async (req, res) => {
-  try {
-    const deletedUser = await User.findByIdAndDelete(req.user);
-    res.json(deletedUser);
-  } catch (err) {
-    res.status(500).json({
-      error: err.message
-    });
-  }
-});
+// router.delete("/Personalprofile", auth, async (req, res) => {
+//   try {
+//     const deletedUser = await User.findByIdAndDelete(req.user);
+//     res.json(deletedUser);
+//   } catch (err) {
+//     res.status(500).json({
+//       error: err.message
+//     });
+//   }
+// });
+// router.delete("/:id",auth, (req, res) => {
+//   Item.findByIdAndDelete(req.params.id)
+//     .then(() => res.json('Item is deleted!'))
+//     .catch(err => res.status(400).json("Error: " + err));
+// });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id",auth, (req, res) => {
   User.findByIdAndDelete(req.params.id)
     .then(() => res.json("User deleted"))
     .catch((err) => res.status(400).json("Error: " + err));
@@ -193,7 +198,7 @@ router.post("/", (req, res) => {
 router.patch("/edit/:id",auth, (req, res) => {
   // console.log(req.header)
   User.findByIdAndUpdate(req.params.id,req.body)
-    .then(() => res.json("post updated"))
+    .then(() => res.json("user updated"))
     .catch(err => {console.log(err)
       res.status(400).json('Error: ' + err)});
 })

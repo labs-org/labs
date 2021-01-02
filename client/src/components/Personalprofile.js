@@ -2,7 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
-import Allpost from './Allpost';
+// import Allpost from './Allpost';
 
 
 
@@ -12,43 +12,14 @@ const Profileuser = (props) => (
     <td>{props.user.labName}</td>
     <td>{props.user.location}</td>
     <td>{props.user.phone}</td>
-    <td>{props.user.testType}</td>
-    <td>{props.user.price}</td>
+    {/* <td>{props.user.testType}</td>
+    <td>{props.user.price}</td> */}
 
 
-
-    {/* <td>
-      <img
-        src={props.item.image}
-        width="200"
-        height="200"
-        class="w3-round"
-        alt="Norway"
-      />
-    </td> */}
-
-    {/* <td>
-      <Link
-        to={'/edit/' + props.item._id}
-        className="btn btn-deep-orange darken-4"
-      >
-        Edit
-      </Link>
-      <button
-        type="button"
-        className="btn btn-deep-orange darken-4"
-        onClick={() => {
-          // console.log(props)
-          props.deletePost(props.item._id);
-        }}
-      >
-        Delete
-      </button>
-    </td> */}
 
       <td>
       <Link
-        to={'/edit/' + props.user._id}
+        to={'/edituser/' + props.user._id}
         className="btn btn-deep-orange darken-4"
       >
         Edit
@@ -83,10 +54,10 @@ const Profileitems= props => (
       />
     </td>
        <td> 
-      <Link to ={'/edit/' + props.item._id} className="btn btn-deep-orange darken-4" >Edit item</Link>
+      <Link to ={'/edit/' + props.item._id} className="btn btn-deep-orange darken-4" >Edit Post</Link>
       <button type = "button" 
       className="btn btn-deep-orange darken-4"
-      onClick = {() => { props.deletePost(props.item._id)}}> Delete Item
+      onClick = {() => { props.deletePost(props.item._id)}}> Delete Post
       </button>
       </td> 
   </tr>
@@ -118,7 +89,7 @@ class Personalprofile extends React.Component {
         console.log(error);
       });
 
-    axios.get('http://localhost:3000/addItems/',  {
+    axios.get('http://localhost:3000/addItems',  {
       headers: {
         'x-auth-token': localStorage.getItem("x-auth-token") ,
         'labName': localStorage.getItem("labName") 
@@ -133,7 +104,7 @@ class Personalprofile extends React.Component {
           }
         }
           // console.log(res.data.length);
-          this.setState({ items: newitems});
+          this.setState({ items: res.data});
         }
        )
        .catch((error) => {
@@ -162,7 +133,7 @@ class Personalprofile extends React.Component {
 
 
   deleteUser(id) {
-    axios.delete('http://localhost:3000/users/Personalprofile' + id,
+    axios.delete('http://localhost:3000/users/' + id,
     {
       headers: {
         'x-auth-token': localStorage.getItem("x-auth-token"),
@@ -211,11 +182,29 @@ class Personalprofile extends React.Component {
                       <p> user information </p>  
                         
          
-          <table className="table">
+                      <table className = "table">
+                <thead className = "thead">
+                    <tr>
+                        <th>LAB Name</th>
+                        <th>LOCATION</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tbody>{this.usersList()}</tbody>
+                </tbody>
             
-           <tbody>{this.usersList()}</tbody>
+                <thead className = "thead">
+                    <tr>
+                        <th>TEST TYPE</th>
+                        <th>PRICE</th>
+                        <th>IMAGE</th>
+                       
+                        
+                    </tr>
+                </thead>
             <tbody>{this.itemsList()}</tbody>
-            <Allpost />
+        
           </table>
         </div>
         <br />

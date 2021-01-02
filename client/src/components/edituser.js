@@ -68,7 +68,7 @@ handleUpload () {
        }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/addItems/'+this.props.match.params.id)
+    axios.get('http://localhost:3000/users/register'+this.props.match.params.id)
     
       .then(response => {
         this.setState({
@@ -85,18 +85,6 @@ handleUpload () {
         console.log(error);
       })
 
-      // axios.put('http://127.0.0.1:3000/addItems/edit/' +this.props.match.params.id )
-      // .then((item) => window.location = '/')
-      
-      // .catch(function (error) {
-      //   console.log(error)
-      // })
-     
-        // axios.delete('http://localhost:3000/addItems/' +this.props.match.params.id).then((res) => console.log(res.data))
-        // // this.setState({
-        // //   items: this.state.items.filter((el) => el._id !== id),
-        // // });
-    // console.log(localStorage.getItem("x-auth-token"))
     
     }
 
@@ -152,7 +140,7 @@ handleUpload () {
     console.log(this.props.match.params);
     // const auth = localStorage.getItem("x-auth-token");
 
-    axios.patch("http://localhost:3000/addItems/edit/"+this.props.match.params.id,user
+    axios.patch("http://localhost:3000/users/edit/"+this.props.match.params.id,user
     , {
         headers: {
           'x-auth-token': localStorage.getItem("x-auth-token"),
@@ -162,7 +150,7 @@ handleUpload () {
     .then(res => console.log(res));
       console.log("updated")
 // go bact to all labs page after update the post
-    window.location = '/AllLabs'
+    window.location = '/Personalprofile'
   }
 
   render() {
@@ -171,7 +159,7 @@ handleUpload () {
 
           <form className="text-center border border-light p-5" action="#!" onSubmit = {this.onSubmit}>
 
-            <p className="h4 mb-4">Edit Your Post</p>
+            <p className="h4 mb-4">Edit Your Profile</p>
 
              
           <div className="col">

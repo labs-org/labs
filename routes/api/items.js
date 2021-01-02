@@ -20,13 +20,14 @@ router.get("/", async (req, res) => {
     .catch((err) => res.status(400).json("error here" + err));
 
 });
-// router.get("/allpost", async (req, res) => {
-//   Item.find()
-//   .then(items => res.json(items))
-//     // .then((ItemSchema) => res.json(ItemSchema))
-//     .catch((err) => res.status(400).json("error here" + err));
 
-// });
+router.get("/fetch", async (req, res) => {
+  Item.find()
+  .then(items => res.json(items))
+    // .then((ItemSchema) => res.json(ItemSchema))
+    .catch((err) => res.status(400).json("error here" + err));
+
+});
 
 //route create the item
 router.post("/", (req, res) => {
@@ -70,7 +71,12 @@ router.patch("/edit/:id",auth, (req, res) => {
     .catch(err => {console.log(err)
       res.status(400).json('Error: ' + err)});
 })
-
+// router.patch("/edit/:id",auth, (req, res) => {
+//   // console.log(req.header)
+//   User.findByIdAndUpdate(req.params.id,req.body)
+//     .then(() => res.json("post updated"))
+//     .catch(err => {console.log(err)
+//       res.status(400).json('Error: ' + err)});
 
 
 

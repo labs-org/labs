@@ -1,6 +1,5 @@
 import React from 'react';
 import  { useState, useEffect } from "react";
-// import Header from './components/layout/Header';
 import AppNavbar from "./components/AppNavbar";
 import AllLabs from "./components/AllLabs";
 import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
@@ -15,11 +14,10 @@ import { Jumbotron } from './components/Jumbotron';
 import  Personalprofile from './components/Personalprofile';
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-import Editpost from './components/editpost';
+import Edituser from './components/edituser';
 import EditPost from './components/edit';
 import UserContext from "./context/userContext";
 import Axios from "axios";
-import Allpost from './components/Allpost';
 import EmailUs from "./components/Email";
 
 
@@ -71,12 +69,10 @@ export default function App() {
               <Route path="/AddPost" component={AddPost} />
               <Route path="/AllLabs" component={AllLabs} />
               <Route path = "/login" component = { Login } />
-              <Route path = "/fetch" component = {Allpost} />
               <Route path="/EmailUs" component = {EmailUs}/>
               <Route path = "/edit/:id" component = { EditPost }/>
-              <Route path = "/editpost/:id" component = { Editpost}/>
+              <Route path = "/edituser/:id" component = { Edituser}/>
               <Route path = "/personalprofile" component = {Personalprofile} />
-              {/* <Route path = "/add"  component = { Signup } /> */}
               <Route path = "/register" component = {Register} />
            
               <Route component={NoMatch} />
