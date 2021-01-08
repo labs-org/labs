@@ -14,7 +14,6 @@ export default function AuthOptions() {
   const logout = () => {
     setUserData({
       token: undefined,
-      user: undefined,
       labName: undefined
     });
     localStorage.setItem("x-auth-token", "");

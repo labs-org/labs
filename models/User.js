@@ -29,7 +29,11 @@ const UserSchema = new mongoose.Schema({
         minlength: 5,
         required: true,
     },
-    
+    description: {
+        type: String,
+        minlength: 5,
+        required: true,
+    },
     image: {
         type: String,
         required: false,

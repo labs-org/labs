@@ -16,8 +16,7 @@ router.post("/register", async (req, res) => {
       labName,
       location,
       phone,
-      testType,
-      price
+      description
       
     } = req.body;
 
@@ -63,8 +62,7 @@ router.post("/register", async (req, res) => {
       labName,
       location,
       phone,
-      testType,
-      price
+      description
     });
     const savedUser = await newUser.save();
     console.log(savedUser);
@@ -115,7 +113,7 @@ router.post("/login", async (req, res) => {
       labName: user.labName,
       user: {
         id: user._id,
-       
+      
       },
     });
   } catch (err) {
@@ -175,8 +173,7 @@ router.post("/", (req, res) => {
     labName:req.body.labName,
     location:req.body.location,
     phone:req.body.phone,
-    testType:req.body.testType,
-    price:req.body.price,
+    description: req.body.description,
     image:req.body.image,    
   });
 

@@ -8,7 +8,7 @@ const Styles = styled.div`
     background: url(${lab}) no-repeat fixed bottom;
     background-size: cover;
     color: #efefef;
-    height: 200px;
+    height: 300px;
     position: relative;
     z-index: -0.5;
   }
