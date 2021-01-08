@@ -5,7 +5,7 @@ const FooterPage = () => {
   return (
   
 <div className="main-footer">
-<div classname = "container"  style={{background:"#171819"}}>
+<div classname = "container"  style={{background:"#171819", width: "100vw"}}>
     <div className="row">
         <div className="col-md-3 col-sm-6" style={{color:"white"}}>
             <h4>About Us</h4>

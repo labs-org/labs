@@ -1,12 +1,8 @@
-
 import React from 'react';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
-// import { timers } from 'jquery';
 
-
-const Profileuser = (props) => (
-  
+const Profileuser = (props) => ( 
   <div  >
     <div className="row">
     <div className="col-sm">{props.user.labName}</div>
@@ -18,39 +14,32 @@ const Profileuser = (props) => (
 
 
 const Profileitems= props => (
-  <div className="container">
+  <div className="container-fluid">
     <div className="row">
-  <div className="card" 
+      
+  <div className="card testimonial-card" 
   style={{ margin: '0 auto', width: '22rem', borderRadius: '2.5rem', }}>
-   
+   <div className="card-up indigo lighten-1"></div>
+   <span className="avatar mx-auto white">
+      
+      </span>
     <div className="card-body">
     <div>
-      <img class="card-img-top"
+      <img className="card-img-top rounded-circle z-depth-2"
 
         src={props.item.image}
         width="150"
-        height="100"
-        className="rounded-circle z-depth-2" 
+        height="100"    
         alt="100x100"
         data-holder-rendered={true}
       />
-    </div>
-     <div className="card-title" >LAB Name:
-     <p className="card-text"> {props.item.labName}</p></div>
-     <div className="card-title" >Location:
-     <p className="card-text"> {props.item.location}</p></div>
-     <div className="card-title" >Phone:
-     <p className="card-text"> {props.item.phone}</p></div>
-     <div className="card-title" >Test Type:
-     <p className="card-text"> {props.item.testType}</p></div>
-     <div className="card-title" >Price:
-     <p className="card-text"> {props.item.price}</p></div>
-     {/* <div className="col-sm">Location: {props.item.location}</div>
-     <div className="col-sm">Phone: {props.item.phone}</div>
-      <div className="col-sm">Test Type: {props.item.testType}</div>
-      <div className="col-sm">Price: {props.item.price}</div> */}
-  
-      </div>
+    </div>   
+     <p className="card-text"> LAB Name: {props.item.labName}</p>   
+     <p className="card-text"> Location: {props.item.location}</p>
+     <p className="card-text"> Phone: {props.item.phone}</p>   
+     <p className="card-text"> Test Type: {props.item.testType}</p>
+     <p className="card-text"> Price: {props.item.price}</p>
+   </div>
       <div className="card-body" style={{display:"inline"}}>
       <div>
       <Link to ={'/edit/' + props.item._id}  className="btn btn-primary btn-sm float-left" > Edit </Link>
@@ -161,7 +150,7 @@ class Personalprofile extends React.Component {
 
 
   render() {
-
+    if(localStorage.getItem("x-auth-token") !== null) {
     return (
       
       <div  className="container text-center border border-light p-9">
@@ -172,26 +161,17 @@ class Personalprofile extends React.Component {
                       <b>
             Want to Post Anything?<a href="/AddPost"> Add Post </a>
           </b>
-              <div className = "container ">
-                   <div className = "row">
-                    {/* <tr>
-                        <th>LAB Name</th>
-                         <th>Location</th>
-                         <th>Phone</th>
-                         <th>TEST TYPE</th>
-                         <th>PRICE</th>
-                          <th>IMAGE</th>
-      
-                    </tr> */}
-                </div>
-            <div>{this.itemsList()}</div>
-           
+              {/* <div className = "container ">
+                   <div className = "row"> */}
+            <div>{this.itemsList()}</div> 
           </div>
-         
-        </div>
-        
+      //   </div>    
       // </div>
-    );
+  
+    ) } else {
+      return ( <h1>Please Log in </h1>)
+    }
+    ;
   }
 }
 

@@ -1,65 +1,37 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Card } from "react-bootstrap";
-import FooterPage from './Footer';
+// import { Card } from "react-bootstrap";
+// import FooterPage from './Footer';
 
 
 const Post = (props) => (
   
-  <div className="container-fluid cntr">
-   
-  <div className="card testimonial-card " style={{ width: "50%" , float:"right",borderRadius: '2.5rem', marginTop: "20px" }}>
+  <div className="container flex-direction">
+ <div className="row">
+  <div className="card testimonial-card " style={{ width: "50%" , float:"right",borderRadius: '2.5rem', marginTop: "20px"}}>
     <span className="card-up indigo lighten-1"></span>
     <span className="avatar mx-auto white">
       
-      <div class="row"></div>
-   
   </span>
   <span className="card-body">
   
-      <span className="card-title">labName: 
-      <p className="fas fa-quote-left card-text">{props.user.labName}</p> </span>
-      <span className="card-title">location:
-      <p className="fas fa-quote-left card-text"> {props.user.location}</p></span>
-      <span className="card-title">phone:
-      <p className="fas fa-quote-left card-text"> {props.user.phone}</p></span>
-      <span className="card-title">description: 
-      <p className="fas fa-quote-left card-text">{props.user.description}</p></span>
-      <Link to={'Labprofile/' + props.user.labName}>View more</Link>
-      
-      {/* </div> */}
-  
+      <span className="card-title">
+      <p className="fas fa-quote-left card-text">LabName :  {props.user.labName}</p> </span>
+      <span className="card-title">
+      <p className="fas fa-quote-left card-text"> Location : {props.user.location}</p></span>
+      <span className="card-title">
+      <p className="fas fa-quote-left card-text"> Phone :{props.user.phone}</p></span>
+      <span className="card-title"> 
+      <p className="fas fa-quote-left card-text"> Description : {props.user.description}</p></span>
+      <br/>
+      <Link className="btn btn-outline-success" to={'Labprofile/' + props.user.labName}>View more</Link>
+
     </span>
+    </div>
   </div>
   </div>
-// {/* person1 */}
-// <div className="card testimonial-card " style={{ width: "33%" }}>
-// {/* <!-- Background color --> */}
-// <div className="card-up indigo lighten-1"></div>
-// {/* <!-- Avatar --> */}
-// <div className="avatar mx-auto white">
-//   <img
-//     src={process.env.PUBLIC_URL + "./Images/person4.jpg"}
-//     className="rounded-circle"
-//     alt="woman avatar"
-//     style={{ width: 150, height: 150 }}
-//   />
-// </div>
-// {/* <!-- Content --> */}
-// <div className="card-body">
-//   {/* <!-- Name --> */}
-//   <h4 className="card-title">Christopher Hunt</h4>
-//   {/* <!-- Quotation --> */}
-//   <p>
-//     <i className="fas fa-quote-left"></i> "The biggest achievement
-//     I've made is, truly, fighting for myself. Through working with
-//     Aiko and taking the time to discuss various issues with her,
-//     I've become a bigger advocate for myself, and I'm so proud of
-//     that."
-//   </p>
-// </div>
-// </div>
+
 
 );
 
@@ -71,7 +43,7 @@ class AllLabs extends Component {
       users: [],
       filteredItems: [],
       SearchString: '',
-      // userpost: ''
+      
     };
   }
   componentDidMount() {
@@ -122,14 +94,15 @@ class AllLabs extends Component {
     return (
       <div>
         <br />
-        <div className="text-center " style ={{marginTop : '10px'}}>
-          <h2>Search loaction</h2>
+        <div className="text-center " style ={{marginTop : '10px', borderRadius: '2.5rem'}}>
+          {/* <h2>Search loaction</h2> */}
           <input
             name="search"
-            className="form-control"
+            type="text"
+            className="form-control form-control-sm ml-3 w-50" 
             onChange={(e) => this.onSearch(e)}
             value={this.state.SearchString}
-            placeholder="Search for location"
+            placeholder="Search for Location"
           />
           <div className="container ">
             <div className="row"></div>

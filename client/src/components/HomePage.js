@@ -19,8 +19,8 @@ export const HomePage = ({ isAuthenticated }) => {
         })`,
         backgroundSize:"cover",
         marginLeft: '-400px',
-        marginRight: "4000px",
         width: '100rem ',
+        width: "100vw",
         height: '900px',
         backgroundRepeat:'no-repeat',
         position: "relative"
@@ -29,7 +29,7 @@ export const HomePage = ({ isAuthenticated }) => {
       <div className="home">
         <div
           className="landing-inner"
-          style={{ position: 'absolute', bottom: '-100px', margin: '100px' }}
+          style={{ position: 'absolute', bottom: '150px', margin: '100px' }}
         >
           <h2
             className="large"
@@ -60,7 +60,7 @@ export const HomePage = ({ isAuthenticated }) => {
         <div className="footer-copyright text-center py-3">
           </div>      
           </div>
-          <FooterPage/>
+          {/* <FooterPage/> */}
         </div>
        </div> 
      </div> 
