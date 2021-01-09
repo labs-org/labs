@@ -16,7 +16,8 @@ router.post("/register", async (req, res) => {
       labName,
       location,
       phone,
-      description
+      description,
+      officialWebSite
       
     } = req.body;
 
@@ -62,7 +63,8 @@ router.post("/register", async (req, res) => {
       labName,
       location,
       phone,
-      description
+      description,
+      officialWebSite
     });
     const savedUser = await newUser.save();
     console.log(savedUser);

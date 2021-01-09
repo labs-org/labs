@@ -4,7 +4,7 @@ export default function ErrorNotice(props) {
   return (
     <div className="alert alert-danger" role="alert">
       <span>{props.message}</span>
-      <button onClick={props.clearError}>X</button>
+      <button  className="close" onClick={props.clearError}>X</button>
     </div>
   );
 }

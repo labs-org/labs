@@ -3,8 +3,6 @@ import $ from "jquery";
 import {Button} from "reactstrap";
 import { storage } from "./firebase.js";
 
-
-
 class AddPost extends Component {
     constructor(props) {
       super(props);
@@ -203,19 +201,16 @@ onChangeTestType(e) {
 
                 <div className = "col">
                             <label>Image</label>
-                            <div class="progress">
-                <div class="progress-bar" role="progressbar" style={{width: 'this.setState.progress'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{this.state.progress}</div>
-</div>
+                      
+                    </div>
                            <div  id='image' > <img src={this.state.url || "http://via.placeholder.com/50*50"} 
                             alt="firebase"  /></div> 
                            <input  type="file" onChange={this.handleChangeImage.bind(this)} className="btn btn-deep-orange darken-4" />
                            <button  onClick={this.handleUpload.bind(this)} className="btn btn-deep-orange darken-4">Upload</button>
-                           </div>
+                           
                    <div>
                 <Button color="primary" onClick= {this.onSubmit} className="btn btn-deep-orange darken-4">Submit</Button>
-                </div>
-
-                
+                </div>              
           </form>
  
         </div>

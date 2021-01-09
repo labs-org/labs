@@ -4,21 +4,22 @@ import React from 'react';
 const FooterPage = () => {
   return (
   
-<div className="main-footer">
-<div classname = "container"  style={{background:"#171819", width: "100vw"}}>
-    <div className="row">
+<div className="main-footer" >
+<div classname = "container-fluid"  style={{background:"#171819", width: "100vw",bottom: "0", position: "absolute" }}>
+      <br></br>
+    <div className="row" style={{marginLeft:"100px", }}>
         <div className="col-md-3 col-sm-6" style={{color:"white"}}>
             <h4>About Us</h4>
             <p style={{color:"white"}}> LABS WAS INITIALLY A CREATIVESHOP FOUNDED BY THE STUDENTS OF RBK ACADEMY
               </p>
 
         </div>
-        <div className="col-md-3 col-sm-6" style={{color:"white"}}>
+        <div className="col-md-3 col-sm-6" style={{color:"white", marginLeft:"250px"}}>
             <h4>ADDRESS</h4>
             <p style={{color:"white"}}>Al- Sha'ab St. 29, Al-Jandaweel, Amman, Jordan</p>
 
         </div>
-        <div className="col-md-3 col-sm-6" style={{color:"white"}}>
+        <div className="col-md-3 col-sm-6" style={{color:"white",marginLeft:"200px"}}>
             <h4>Contact Us</h4>
             <ul className="list-unstyled">
                        <li><a href="mailto:labs.organization@labs.com">labs.organization@labs.com</a></li>
@@ -26,7 +27,7 @@ const FooterPage = () => {
            </ul>
         </div>
     </div>
-    <div className="footer-bottom" style={{color:"white"}}>
+    <div className="footer-bottom" style={{color:"white", marginLeft:"800px"}}>
         <p className="text-xs-ceter">
         &copy; {new Date().getFullYear()} LABS - All Rights Reserved
         </p>

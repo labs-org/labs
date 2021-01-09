@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import { Card } from "react-bootstrap";
-// import FooterPage from './Footer';
+import FooterPage from './Footer';
 
 
 const Post = (props) => (
@@ -47,7 +46,7 @@ class AllLabs extends Component {
     };
   }
   componentDidMount() {
-    // const { id } = this.props.match.params;
+   
     axios
       .get(`http://localhost:3000/users/register `)
       .then((response) => {
@@ -92,10 +91,21 @@ class AllLabs extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{
+        backgroundImage: `url(${
+          process.env.PUBLIC_URL + './images/ladyLab.jpeg'
+        })`,
+        backgroundSize:"cover",
+        marginLeft: '-400px',
+        width: '100rem ',
+        width: "100vw",
+        height: '100vh',
+        backgroundRepeat:'no-repeat',
+        position: "relative"
+      }}>
         <br />
-        <div className="text-center " style ={{marginTop : '10px', borderRadius: '2.5rem'}}>
-          {/* <h2>Search loaction</h2> */}
+        <div className="text-center " style ={{marginTop : '10px', borderRadius:'2.5rem',width:"1000px",marginLeft:"400PX"}}>
+       
           <input
             name="search"
             type="text"
@@ -108,8 +118,8 @@ class AllLabs extends Component {
             <div className="row"></div>
           </div>
         </div>
-        <div>{this.lab()}</div>
-     
+        <div>{this.lab()}</div> 
+     <FooterPage/>
       </div>
       
     );

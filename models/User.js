@@ -34,10 +34,10 @@ const UserSchema = new mongoose.Schema({
         minlength: 5,
         required: true,
     },
-    image: {
+    officialWebSite: {
         type: String,
-        required: false,
-        trim: true
+        required: true,
+        unique: true
     },
 
     date : {

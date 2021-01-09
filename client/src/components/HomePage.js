@@ -1,9 +1,5 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-// import Cards from "./Cards";
-// import { MDBContainer, MDBFooter } from "mdbreact";
-import FooterPage from './Footer';
-
 
 export const HomePage = ({ isAuthenticated }) => {
   if (isAuthenticated) {
@@ -19,7 +15,7 @@ export const HomePage = ({ isAuthenticated }) => {
         })`,
         backgroundSize:"cover",
         marginLeft: '-400px',
-        width: '100rem ',
+        width: '100rem',
         width: "100vw",
         height: '900px',
         backgroundRepeat:'no-repeat',

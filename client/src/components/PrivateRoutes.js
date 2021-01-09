@@ -4,7 +4,7 @@ function PrivateRoute({component:Component , ...rest}){
   return (<Route  
     {...rest}
     render={(props) =>{
-    // console.log(typeof localStorage.getItem('x-auth-token') === "string")
+    
         if (typeof localStorage.getItem('x-auth-token') === "string" ){
       return <Component {...props}/>
     }

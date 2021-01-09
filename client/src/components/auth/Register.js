@@ -12,6 +12,7 @@ export default function Register() {
   const [location, setLocation] = useState();
   const [phone, setPhone] = useState();
   const [description, setDescription] = useState();
+  const [officialWebSite, setOfficialWebSite] = useState();
   const [error, setError] = useState();
 
   
@@ -21,7 +22,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const newUser = { email, password, passwordCheck, labName,location, phone, description};
+      const newUser = { email, password, passwordCheck, labName,location, phone, description, officialWebSite};
        Axios.post("http://localhost:3000/users/register", newUser)
        .then(function (){
         history.push("/login");
@@ -43,22 +44,25 @@ export default function Register() {
                   )}
       
                <form className="text-center border border-light p-9" onSubmit={submit}>
-                <label >Email</label>
+                {/* <label >Email</label> */}
                  <input
                   required={true} className="form-control col"
                   id="register-email"
                    type="email"
+                   placeholder="E-MAIL"
                    onChange={(e) => setEmail(e.target.value)}
                    />
-                    <label >Password</label>
+                    {/* <label >Password</label> */}
+                    <br/>
                      <input
                       required={true}  name="password" className="form-control col"
                        id="register-password"
                        type="password"
+                       placeholder=" Password"
                        onChange={(e) => setPassword(e.target.value)}
                        />
                      <br></br>
-                     <label>Verify password</label>
+                     {/* <label>Verify password</label> */}
                       <input
                       required={true}  name="password" className="form-control col"
                       type="password"
@@ -66,37 +70,54 @@ export default function Register() {
                        onChange={(e) => setPasswordCheck(e.target.value)}
                        />
 
-                        <label>Lab Name</label>
+                        {/* <label>Lab Name</label> */}
+                        <br/>
                          <input
                            required={true}  className="form-control col"
                              id="register-lab-name"
                                type="text"
+                               placeholder="Lab Name"
                                onChange={(e) => setLabName(e.target.value)}
                           />
 
-                      <label>Location</label>
+                      {/* <label>Location</label> */}
+                      <br/>
                        <input
                        required={true}  className="form-control col"
                          id="register-location"
                          type="text"
+                         placeholder="Location"
                          onChange={(e) => setLocation(e.target.value)}
                           />
 
-                    <label htmlFor="register-phone">Phone</label>
+                    {/* <label htmlFor="register-phone">Phone</label> */}
+                    <br/>
                     <input
                      required={true}  className="form-control col"
                       id="register-phone"
                     type="text"
+                    placeholder="Phone"
                      onChange={(e) => setPhone(e.target.value)}
                        />
-                     
-                     <label>Description</label>
+                     <br/>
+                     {/* <label>Description</label> */}
                      <input
                       required={true}   className="form-control col"
                        id="register-description"
                        type="text"
+                       placeholder="Description"
                        onChange={(e) => setDescription(e.target.value)}
                        />
+
+                 {/* <label >Your Official WebSite</label> */}
+                 <br/>
+                 <input
+                  required={true} className="form-control col"
+                  id="register-email"
+                   type="email"
+                   placeholder="Your Official WebSite"
+                   onChange={(e) => setOfficialWebSite(e.target.value)}
+                   />
                       
                    <div></div>
                      <br></br>
